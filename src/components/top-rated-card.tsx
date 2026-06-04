@@ -1,7 +1,14 @@
 import { Plus, Star } from "lucide-react";
 import { Button } from "./ui/button";
 
-function TopRatedCard({ movie, IMAGE_BASE = "https://image.tmdb.org/t/p/w1280", handleWatchNow }) {
+type TopRatedCardProps = {
+  movie: any;
+  IMAGE_BASE?: string;
+  handleWatchNow: (movieId: string, movieTitle: string) => void;
+};
+
+
+function TopRatedCard({ movie, IMAGE_BASE = "https://image.tmdb.org/t/p/w1280", handleWatchNow }: TopRatedCardProps) {
   const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
 
   return (

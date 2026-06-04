@@ -79,7 +79,7 @@ export default function Discovery() {
                     ...item,
                     title: item.title || item.name,
                   }}
-                  handleWatchNow={(id, name) => alert(`Streaming: ${name}`)}
+                  handleWatchNow={(_, name) => alert(`Streaming: ${name} `)}
                 />
               </div>
             ))}

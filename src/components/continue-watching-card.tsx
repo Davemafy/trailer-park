@@ -1,10 +1,16 @@
 import { Play } from "lucide-react";
 
+type ContinueWatchingCardProps = {
+  movie: any;
+  IMAGE_BASE?: string;
+  handleWatchNow: (movieId: string, movieTitle: string) => void
+}
+
 function ContinueWatchingCard({
   movie,
   IMAGE_BASE = "https://image.tmdb.org/t/p/w1280",
   handleWatchNow,
-}) {
+}: ContinueWatchingCardProps ) {
   const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
 
   return (

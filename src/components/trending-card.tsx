@@ -1,7 +1,17 @@
 import { Plus } from "lucide-react";
 import { Button } from "./ui/button";
 
-function TrendingCard({ movie, IMAGE_BASE = "https://image.tmdb.org/t/p/w1280", handleWatchNow }) {
+type TrendingCardProps = {
+  movie: any;
+  IMAGE_BASE?: string;
+  handleWatchNow: (movieId: string, movieTitle: string) => void;
+};
+
+function TrendingCard({
+  movie,
+  IMAGE_BASE = "https://image.tmdb.org/t/p/w1280",
+  handleWatchNow,
+}: TrendingCardProps) {
   const releaseYear = movie.first_air_date ? movie.first_air_date.substring(0, 4) : "2026";
 
   return (

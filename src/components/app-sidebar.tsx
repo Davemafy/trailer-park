@@ -10,7 +10,9 @@ import {
   Star,
   Timer,
   Users,
+  type LucideProps,
 } from "lucide-react";
+import type { ForwardRefExoticComponent, RefAttributes } from "react";
 import { NavLink, useLocation } from "react-router";
 
 export default function AppSidebar() {
@@ -79,7 +81,13 @@ export default function AppSidebar() {
   );
 };
 
-function SidebarLink({ to, label, icon: Icon }) {
+type SidebarLinkProps = {
+  to: string;
+  label: string;
+  icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+};
+
+function SidebarLink({ to, label, icon: Icon }: SidebarLinkProps) {
   const location = useLocation();
 
   const isHomeActive =
