@@ -14,9 +14,9 @@ export default function Discovery() {
   } = useDiscoveryData();
 
   return (
-    <div className="p-4 px-6 pb-0 h-screen  flex flex-col gap-4 w-full  text-h-full *:white bg-[#0d0c0f]">
+    <div className="p-4 px-6 pb-0 h-screen  flex flex-col justify-center gap-4 w-full  text-h-full *:white bg-[#0d0c0f]">
       {/* Search Input Section Bar */}
-      <header  className="relative flex items-center w-full max-w-xl">
+      <header  className="relative flex items-center   w-full max-w-xl">
         <Search className="absolute left-4 text-zinc-500 w-5 h-5" />
         <input
           type="text"
@@ -31,7 +31,7 @@ export default function Discovery() {
       </header>
 
       {/* Genre Pills Row Container */}
-      <div className="flex items-center h-max gap-2.5 w-full overflow-x-auto py-2 [&::-webkit-scrollbar]:hidden">
+      <div className="flex items-center h-max gap-2.5 mx-auto w-full overflow-x-auto py-2 [&::-webkit-scrollbar]:hidden">
         <button
           onClick={() => {
             setSearchQuery("");
@@ -71,7 +71,7 @@ export default function Discovery() {
         ) : results.length === 0 ? (
           <div className="text-zinc-500">No items found matching criteria criteria. Try checking your keyword spellings.</div>
         ) : (
-          <div className="flex flex-wrap gap-6">
+          <div className="flex justify-center flex-wrap gap-6">
             {results.map((item: any) => (
               <div key={item.id} className="transition-transform duration-200">
                 <TopRatedCard
