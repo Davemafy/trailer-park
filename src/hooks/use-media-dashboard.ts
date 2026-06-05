@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { TMDB_API_KEY, TMDB_BASE_URL } from "../config/env-config";
 
-
 export function useMediaDashboard(mediaType: "movie" | "tv", genreId?: number) {
   const [trending, setTrending] = useState<TMDBMovieResponse[]>([]);
   const [popular, setPopular] = useState<TMDBMovieResponse[]>([]);
