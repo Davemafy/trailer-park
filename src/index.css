@@ -66,28 +66,28 @@
 
 @font-face {
   font-family: "Apty";
-  src: url("assets/fonts/AtypDisplay-Regular.woff2") format("woff2");
+  src: url("assets/fonts/atypdisplay-regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Apty";
-  src: url("assets/fonts/AtypDisplay-Medium.woff2") format("woff2");
+  src: url("assets/fonts/atypdisplay-medium.woff2") format("woff2");
   font-style: normal;
   font-weight: 500;
 }
 
 @font-face {
   font-family: "Apty";
-  src: url("assets/fonts/AtypDisplay-Semibold.woff2") format("woff2");
+  src: url("assets/fonts/atypdisplay-semibold.woff2") format("woff2");
   font-style: normal;
   font-weight: 600;
 }
 
 @font-face {
   font-family: "Apty";
-  src: url("assets/fonts/AtypDisplay-Bold.woff2") format("woff2");
+  src: url("assets/fonts/astypdisplay-bold.woff2") format("woff2");
   font-style: normal;
   font-weight: 700;
 }
