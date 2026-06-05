@@ -7,8 +7,11 @@ type TopRatedCardProps = {
   handleWatchNow: (movieId: string, movieTitle: string) => void;
 };
 
-
-function TopRatedCard({ movie, IMAGE_BASE = "https://image.tmdb.org/t/p/w1280", handleWatchNow }: TopRatedCardProps) {
+function TopRatedCard({
+  movie,
+  IMAGE_BASE = "https://image.tmdb.org/t/p/w1280",
+  handleWatchNow,
+}: TopRatedCardProps) {
   const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
 
   return (

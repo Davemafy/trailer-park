@@ -27,7 +27,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
   }
 
   return (
-    <div className="grid gap-8 w-full">
+    <div className="grid gap-2 w-full">
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="relative w-full max-w-4xl bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
@@ -73,7 +73,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       {/* Popular / Continue Watching Section */}
       <section className="grid gap-3 w-full">
         <header className="flex justify-between">
-          <h2 className="font-medium text-[17.5px]">Popular {titlePrefix.toLowerCase()}</h2>
+          <h2 className="font-medium text-[17.5px]">Continue watching</h2>
           <button className="flex gap-1 items-center text-[15px] text-fade">
             See all <ChevronRight size={15} />
           </button>
