@@ -71,7 +71,7 @@ export default function Discovery() {
         ) : results.length === 0 ? (
           <div className="text-zinc-500">No items found matching criteria criteria. Try checking your keyword spellings.</div>
         ) : (
-          <div className="flex justify-center flex-wrap gap-6">
+          <div className="flex flex-wrap gap-6">
             {results.map((item: any) => (
               <div key={item.id} className="transition-transform duration-200">
                 <TopRatedCard
