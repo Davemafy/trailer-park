@@ -13,8 +13,12 @@ import Help from "./features/help/";
 import Series from "./features/series/";
 import Movies from "./features/movies/";
 import TvShows from "./features/tv-shows/";
+import MovieDetails from "./features/movie-details";
+import TvShowsDetails from "./features/tv-shows-details";
+import SeriesDetails from "./features/series-details";
 
 function App() {
+  
   return (
     <div className="bg-[#0d0c0f] text-white">
       {/* Navigation Menu */}
@@ -25,9 +29,13 @@ function App() {
           {/* Route Configuration */}
           <Routes>
             <Route path="/" element={<Home />}>
-              <Route index element={<Movies />} /> {/* Path: "/" */}
-              <Route path="series" element={<Series />} /> {/* Path: "/series" */}
-              <Route path="tv-shows" element={<TvShows />} /> {/* Path: "/tv-shows" */}
+              <Route index element={<Movies />} />
+              <Route path="series" element={<Series />} />
+              <Route path="tv-shows" element={<TvShows />} /> 
+              <Route path="movies/:id" element={<MovieDetails />} />
+              <Route path="tv-shows/:id" element={<TvShowsDetails/>} />
+              <Route path="series/:id" element={<SeriesDetails />} />
+
             </Route>
             <Route path="/discovery" element={<Discovery />} />
             <Route path="/community" element={<Community />} />
