@@ -1,21 +1,25 @@
 import { Play } from "lucide-react";
+import { Link } from "react-router";
 
 type ContinueWatchingCardProps = {
   movie: any;
   IMAGE_BASE?: string;
-  handleWatchNow: (movieId: string, movieTitle: string) => void
-}
+  handleWatchNow: (movieId: string, movieTitle: string) => void;
+};
 
 function ContinueWatchingCard({
   movie,
   IMAGE_BASE = "https://image.tmdb.org/t/p/w1280",
   handleWatchNow,
-}: ContinueWatchingCardProps ) {
+}: ContinueWatchingCardProps) {
   const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
 
   return (
     <article className="continue-watching-card bg-neutral-0 relative isolate flex h-50 w-70 shrink-0 overflow-clip rounded-xl">
-      <div className="mt-auto flex h-full w-full items-end gap-2 bg-linear-0 from-black/90 to-transparent p-6 px-6.5">
+      <Link
+        to={`/movies/${movie.id}`}
+        className="mt-auto flex h-full w-full items-end gap-2 bg-linear-0 from-black/90 to-transparent p-6 px-6.5"
+      >
         <div className="relative z-10 flex flex-1 cursor-default flex-col gap-2">
           <div>
             <h3 className="max-w-[90%] truncate text-base font-semibold">{movie.title}</h3>
@@ -31,7 +35,8 @@ function ContinueWatchingCard({
             <span>1:20:06</span>
           </div>
         </div>
-      </div>
+      </Link>
+
       <img
         className="movie-banner absolute -z-1 h-full w-full object-cover object-top"
         src={`${IMAGE_BASE}${movie.backdrop_path}`}
