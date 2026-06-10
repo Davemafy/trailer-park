@@ -38,7 +38,7 @@ export default function AppSidebar() {
   return (
     <div className="w-54 bg-[#1a161f]">
       <aside className="text-fade relative h-full shadow-2xl shadow-black">
-        <nav className="flex h-full flex-col pt-16 pb-6 pl-6 text-[15px]">
+        <nav className="flex h-full flex-col pt-16 pb-6 pl-6 text-smp">
           {/* Menu Section */}
           <div className="pb-5">
             <h3 className="text-[11px]">MENU</h3>
@@ -79,7 +79,7 @@ export default function AppSidebar() {
       </aside>
     </div>
   );
-};
+}
 
 type SidebarLinkProps = {
   to: string;
@@ -94,7 +94,10 @@ function SidebarLink({ to, label, icon: Icon }: SidebarLinkProps) {
     to === "/" &&
     (location.pathname === "/" ||
       location.pathname === "/series" ||
-      location.pathname === "/tv-shows");
+      location.pathname === "/tv-shows" ||
+      location.pathname.includes("/movies/") ||
+      location.pathname.includes("/series/") ||
+      location.pathname.includes("/tv-shows/"));
 
   return (
     <li>
@@ -108,17 +111,18 @@ function SidebarLink({ to, label, icon: Icon }: SidebarLinkProps) {
       >
         {({ isActive }) => {
           const activeState = isActive || isHomeActive;
-          
-          return (
-          <>
-            <Icon stroke={activeState ? "#f3182c" : "currentColor"} size={to === "/" ? 18 : 17} />
-            <p>{label}</p>
 
-            {activeState && (
-              <div className="absolute top-0 right-0 h-full w-1 rounded-tl-sm rounded-bl-sm bg-[#f3182c]"></div>
-            )}
-          </>
-        )}}
+          return (
+            <>
+              <Icon stroke={activeState ? "#f3182c" : "currentColor"} size={to === "/" ? 18 : 17} />
+              <p>{label}</p>
+
+              {activeState && (
+                <div className="absolute top-0 right-0 h-full w-1 rounded-tl-sm rounded-bl-sm bg-[#f3182c]"></div>
+              )}
+            </>
+          );
+        }}
       </NavLink>
     </li>
   );
