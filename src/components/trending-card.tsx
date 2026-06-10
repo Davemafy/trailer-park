@@ -22,18 +22,24 @@ function TrendingCard({
       <div className="mt-auto flex h-full w-full items-end gap-2 bg-linear-0 from-black to-transparent p-6">
         <div className="flex-1">
           <h3 className="text-xl font-semibold">{movie.title}</h3>
-          <p className="movie-overview font-regular text-[14px]">{movie.overview}</p>
-          <p>{releaseYear}</p>
-          <div className="mt-1 flex items-center gap-1">
+          <p className="movie-overview font-regular mb-3 text-[13px]">{movie.overview}</p>
+          <p className="movie-details text-xs">{releaseYear}</p>
+          <div className="movie-details mt-1 flex items-center gap-1">
             <img
-              className="h-4"
+              className="h-3"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/960px-IMDB_Logo_2016.svg.png?_=20200406194337"
               alt="imdb"
             />
-            <p className="text-[13px]">{movie.vote_average?.toFixed(1)} rating</p>
+            <p className="text-[11px]">{movie.vote_average?.toFixed(1)} rating</p>
           </div>
         </div>
-        <div className="mt-auto flex flex-1 items-center justify-end gap-1.5">
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+          className="mt-auto flex flex-1 items-center justify-end gap-1.5"
+        >
           <Button
             onClick={() => handleWatchNow(movie.id, movie.title)}
             className="rounded-full bg-[#9f0922a1] p-2 px-4 text-sm transition-colors hover:bg-[#9f0922]"
