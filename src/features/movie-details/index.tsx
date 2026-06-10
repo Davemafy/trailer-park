@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { Play, Plus, Star, ArrowLeft, Clock, Calendar, Globe } from "lucide-react";
+import { Plus, Star, ArrowLeft, Clock, Calendar, Globe } from "lucide-react";
 import { TMDB_API_KEY, TMDB_BASE_URL } from "../../config/env-config";
 import { Button } from "@/components/ui/button";
+import ReactPlayer from "react-player";
+
 
 interface MovieDetailData {
   id: number;
@@ -26,6 +28,40 @@ export default function MovieDetails() {
 
   const [movie, setMovie] = useState<MovieDetailData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [activeVideoKey, setActiveVideoKey] = useState<string | null>(null);
+  const [playingTitle, setPlayingTitle] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleWatchNow = async (mediaId: number, mediaTitle: string) => {
+    setIsModalOpen(true);
+    try {
+      const videoUrl = `${TMDB_BASE_URL}/${mediaType}/${mediaId}/videos?api_key=${TMDB_API_KEY}`;
+      const res = await fetch(videoUrl);
+      const data = await res.json();
+
+      const trailer = data.results?.find(
+        (vid: any) => vid.site === "YouTube" && (vid.type === "Trailer" || vid.type === "Teaser")
+      );
+
+      if (trailer) {
+        setActiveVideoKey(trailer.key);
+        setPlayingTitle(mediaTitle);
+      } else {
+        alert("Trailer preview not available for this title.");
+        setIsModalOpen(false);
+      }
+    } catch (err) {
+      console.error("Error fetching video metadata:", err);
+      setIsModalOpen(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setPlayingTitle(null);
+    setActiveVideoKey(null);
+  };
 
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w1280";
 
@@ -78,6 +114,33 @@ export default function MovieDetails() {
         <ArrowLeft size={14} />
         Back
       </button>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-zinc-800/50 bg-zinc-900/50 px-6 py-4">
+              <h3 className="truncate text-lg font-medium text-white">
+                {playingTitle ? `Now playing: ${playingTitle}` : "Watch Trailer"}
+              </h3>
+              <button
+                onClick={handleCloseModal}
+                className="rounded-full bg-zinc-800/50 p-2 px-3 text-sm text-zinc-400 transition-all hover:bg-zinc-800 hover:text-white"
+              >
+                ✕ Close
+              </button>
+            </div>
+            <div className="relative flex aspect-video w-full items-center justify-center bg-black">
+              <ReactPlayer
+                src={`https://youtube.com/watch?v=${activeVideoKey}`}
+                controls
+                playing
+                height="100%"
+                width="100%"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Cinematic Banner Canvas Area */}
       <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-[#151517]">
