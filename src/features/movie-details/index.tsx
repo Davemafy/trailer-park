@@ -36,7 +36,7 @@ export default function MovieDetails() {
   const handleWatchNow = async (mediaId: number, mediaTitle: string) => {
     setIsModalOpen(true);
     try {
-      const videoUrl = `${TMDB_BASE_URL}/${mediaType}/${mediaId}/videos?api_key=${TMDB_API_KEY}`;
+      const videoUrl = `${TMDB_BASE_URL}/movie/${mediaId}/videos?api_key=${TMDB_API_KEY}`;
       const res = await fetch(videoUrl);
       const data = await res.json();
 
