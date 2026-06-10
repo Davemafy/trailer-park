@@ -30,24 +30,24 @@
 
   aside button,
   aside a {
-    @apply flex gap-3 items-center transition-colors;
+    @apply flex items-center gap-3 transition-colors;
 
     svg {
-      stroke-dasharray: 0px; 
-      
+      stroke-dasharray: 0px;
+
       transition: stroke-dashoffset 150ms ease;
       will-change: stroke-dashoffset;
     }
 
     &:hover {
-      @apply text-white font-medium;
+      @apply font-medium text-white;
 
       svg {
         stroke: #b6101e;
-        stroke-dashoffset: 0px; 
+        stroke-dashoffset: 0px;
       }
-    }  
-}
+    }
+  }
 
   nav ul li:hover {
     @apply text-white;
@@ -124,7 +124,6 @@ main h2 {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: clip;
-
 }
 
 .trending-card .movie-overview {
@@ -136,14 +135,25 @@ main h2 {
   overflow: clip;
 
   opacity: 0;
-  transition: all 300ms ease-in-out, opacity 10ms;
+  transition:
+    all 300ms ease-in-out, opacity 200ms;
 }
 
 .trending-card:hover .movie-overview {
-  transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1), opacity 1000ms;
+  transition:
+    all 300ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    opacity 1000ms;
 
   height: fit-content;
   opacity: 1;
+}
+
+.trending-card:hover .movie-details {
+  transition:
+    all 300ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    opacity 1000ms;
+
+  height: fit-content;
 }
 
 .trending-card > div {
@@ -151,11 +161,17 @@ main h2 {
   transition: 500ms;
 }
 
+
 .top-rated-card:hover .movie-banner {
   transition: 500ms;
-  scale: 1.02
+  scale: 1.02;
 }
-  
+
+.top-rated-card:hover .movie-banner {
+  transition: 500ms;
+  scale: 1.02;
+}
+
 .trending-card:hover > div {
   background-color: rgba(0, 0, 0, 0.3);
 }
