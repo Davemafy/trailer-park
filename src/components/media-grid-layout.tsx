@@ -30,7 +30,6 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
   const location = useLocation();
   const moviepath = `${location.pathname === "/" ? "movies" : location.pathname}`;
 
-
   console.log(location.pathname, location);
 
   return (
@@ -106,7 +105,9 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
         </header>
         <div className="scroll-container -mx-6 flex gap-3 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
           {topRated.slice(0, 10).map((item: any) => (
-            <TopRatedCard key={item.id} movie={item} handleWatchNow={handleWatchNow} />
+            <Link to={`${moviepath}/${item.id}`}>
+              <TopRatedCard key={item.id} movie={item} handleWatchNow={handleWatchNow} />
+            </Link>
           ))}
         </div>
       </section>

@@ -136,7 +136,8 @@ main h2 {
 
   opacity: 0;
   transition:
-    all 300ms ease-in-out, opacity 200ms;
+    all 300ms ease-in-out,
+    opacity 200ms;
 }
 
 .trending-card:hover .movie-overview {
@@ -161,15 +162,13 @@ main h2 {
   transition: 500ms;
 }
 
-
-.top-rated-card:hover .movie-banner {
+.top-rated-card .movie-banner {
   transition: 500ms;
-  scale: 1.02;
 }
 
 .top-rated-card:hover .movie-banner {
   transition: 500ms;
-  scale: 1.02;
+  scale: 1.2;
 }
 
 .trending-card:hover > div {
