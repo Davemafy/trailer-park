@@ -3,9 +3,10 @@ import ReactPlayer from "react-player";
 import TrendingCard from "./trending-card";
 import ContinueWatchingCard from "./continue-watching-card";
 import TopRatedCard from "./top-rated-card";
+import { Link, useLocation } from "react-router";
 
 interface MediaGridLayoutProps {
-  data: any; 
+  data: any;
   titlePrefix: string;
 }
 
@@ -26,23 +27,29 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
     return <div className="text-zinc-500">Loading {titlePrefix.toLowerCase()} dashboard...</div>;
   }
 
+  const location = useLocation();
+  const moviepath = `${location.pathname === "/" ? "movies" : location.pathname}`;
+
+
+  console.log(location.pathname, location);
+
   return (
-    <div className="grid gap-2 w-full">
+    <div className="grid w-full gap-2">
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="relative w-full max-w-4xl bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
-            <div className="flex items-center justify-between px-6 py-4 bg-zinc-900/50 border-b border-zinc-800/50">
-              <h3 className="text-white font-medium text-lg truncate">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-zinc-800/50 bg-zinc-900/50 px-6 py-4">
+              <h3 className="truncate text-lg font-medium text-white">
                 {playingTitle ? `Now playing: ${playingTitle}` : "Watch Trailer"}
               </h3>
               <button
                 onClick={handleCloseModal}
-                className="text-zinc-400 hover:text-white bg-zinc-800/50 hover:bg-zinc-800 p-2 px-3 rounded-full transition-all text-sm"
+                className="rounded-full bg-zinc-800/50 p-2 px-3 text-sm text-zinc-400 transition-all hover:bg-zinc-800 hover:text-white"
               >
                 ✕ Close
               </button>
             </div>
-            <div className="relative w-full aspect-video bg-black flex items-center justify-center">
+            <div className="relative flex aspect-video w-full items-center justify-center bg-black">
               <ReactPlayer
                 src={`https://youtube.com/watch?v=${activeVideoKey}`}
                 controls
@@ -56,29 +63,31 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       )}
 
       {/* Trending Section */}
-      <section className="grid gap-3 w-full">
+      <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="font-medium text-[17.5px]">Trending {titlePrefix.toLowerCase()}</h2>
-          <button className="flex gap-1 items-center text-[15px] text-fade">
+          <h2 className="text-sm font-medium">Trending {titlePrefix.toLowerCase()}</h2>
+          <button className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </button>
         </header>
-        <div className="flex overflow-x-auto min-h-64 -mx-6 px-6 gap-2.5 pb-4 scroll-container [&::-webkit-scrollbar]:hidden">
+        <div className="scroll-container -mx-6 flex min-h-64 gap-2.5 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
           {trending.slice(0, 10).map((item: any) => (
-            <TrendingCard key={item.id} movie={item} handleWatchNow={handleWatchNow} />
+            <Link to={`${moviepath}/${item.id}`}>
+              <TrendingCard key={item.id} movie={item} handleWatchNow={handleWatchNow} />
+            </Link>
           ))}
         </div>
       </section>
 
       {/* Popular / Continue Watching Section */}
-      <section className="grid gap-3 w-full">
+      <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="font-medium text-[17.5px]">Continue watching</h2>
-          <button className="flex gap-1 items-center text-[15px] text-fade">
+          <h2 className="text-sm font-medium">Continue watching</h2>
+          <button className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </button>
         </header>
-        <div className="flex overflow-x-auto min-h-50 -mx-6 px-6 gap-6 pb-4 scroll-container [&::-webkit-scrollbar]:hidden">
+        <div className="scroll-container -mx-6 flex min-h-50 gap-6 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
           {popular.slice(0, 10).map((item: any) => (
             <ContinueWatchingCard key={item.id} movie={item} handleWatchNow={handleWatchNow} />
           ))}
@@ -86,16 +95,16 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       </section>
 
       {/* Top Rated Section */}
-      <section className="grid gap-3 w-full">
+      <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="flex gap-2 items-center font-medium text-[17.5px]">
+          <h2 className="flex items-center gap-2 text-sm font-medium">
             Top Rated <Star stroke="#ffc729" fill="#ffc729" size={16} />
           </h2>
-          <button className="flex gap-1 items-center text-[15px] text-fade">
+          <button className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </button>
         </header>
-        <div className="flex overflow-x-auto -mx-6 px-6 gap-3 pb-4 scroll-container [&::-webkit-scrollbar]:hidden">
+        <div className="scroll-container -mx-6 flex gap-3 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
           {topRated.slice(0, 10).map((item: any) => (
             <TopRatedCard key={item.id} movie={item} handleWatchNow={handleWatchNow} />
           ))}
