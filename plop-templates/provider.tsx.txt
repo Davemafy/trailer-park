@@ -1,0 +1,21 @@
+import { useMemo, type PropsWithChildren } from "react";
+import { {{pascalCase name}}Context } from "./{{dashCase name}}-context";
+import { useLocalStorage } from "@/hooks/use-local-storage";
+
+export const {{pascalCase name}}Provider = ({ children }: PropsWithChildren) => {
+  const [state, setState] = useLocalStorage<any>("", null);
+
+  const providerValue = useMemo(
+    () => ({
+      state,
+      setState
+    }),
+    [state]
+  );
+
+  return (
+    <{{pascalCase name}}Context.Provider value={providerValue}>
+      {children}
+    </{{pascalCase name}}Context.Provider>
+  );
+};

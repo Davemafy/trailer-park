@@ -1,0 +1,2 @@
+export * from "./{{dashCase name}}-context";
+export * from "./{{dashCase name}}-provider";

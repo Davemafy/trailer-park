@@ -1,0 +1,8 @@
+import { createContext, type Dispatch, type SetStateAction } from "react";
+
+export interface {{pascalCase name}}ContextType {
+  state: any;
+  setState: Dispatch<SetStateAction<any>>;
+}
+
+export const {{pascalCase name}}Context = createContext<{{pascalCase name}}ContextType | null>(null);
