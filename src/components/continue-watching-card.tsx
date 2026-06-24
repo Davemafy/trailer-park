@@ -1,3 +1,4 @@
+import { useRecents } from "@/features/recents/useRecents";
 import { Play } from "lucide-react";
 import { Link } from "react-router";
 
@@ -13,9 +14,13 @@ function ContinueWatchingCard({
   handleWatchNow,
 }: ContinueWatchingCardProps) {
   const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
+  const { updateRecents } = useRecents()
 
   return (
-    <article className="continue-watching-card bg-neutral-0 relative isolate flex h-50 w-70 shrink-0 overflow-clip rounded-xl">
+    <article
+      onClick={() => updateRecents(movie)}
+      className="continue-watching-card bg-neutral-0 relative isolate flex h-50 w-70 shrink-0 overflow-clip rounded-xl"
+    >
       <Link
         to={`/movies/${movie.id}`}
         className="mt-auto flex h-full w-full items-end gap-2 bg-linear-0 from-black/90 to-transparent p-6 px-6.5"

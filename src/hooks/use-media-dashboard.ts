@@ -7,6 +7,7 @@ export function useMediaDashboard(mediaType: "movie" | "tv", genreId?: number) {
   const [topRated, setTopRated] = useState<TMDBMovieResponse[]>([]);
   const [loading, setLoading] = useState(true);
 
+ 
   const [activeVideoKey, setActiveVideoKey] = useState<string | null>(null);
   const [playingTitle, setPlayingTitle] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

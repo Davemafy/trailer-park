@@ -5,7 +5,6 @@ import { TMDB_API_KEY, TMDB_BASE_URL } from "../../config/env-config";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
 
-
 interface TvDetailData {
   id: number;
   name: string;
@@ -64,7 +63,7 @@ export default function TvDetails() {
     setPlayingTitle(null);
     setActiveVideoKey(null);
   };
-
+  
 
   useEffect(() => {
     async function fetchTvDetails() {

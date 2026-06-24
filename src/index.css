@@ -92,6 +92,12 @@
   font-weight: 700;
 }
 
+html,
+body {
+  height: 100vh;
+  height: 100dvh;
+}
+
 body {
   font-family: "Apty";
 
@@ -105,7 +111,8 @@ body {
   /* 3. Optimal baseline body settings for cleanliness */
   font-size: 16px;
   line-height: 1.5; /* Generous line height prevents crowded text */
-  letter-spacing: -0.01em; /* Slight squeeze makes geometric fonts like Montreal look punchier */
+  letter-spacing: -0.01em;
+  background-color: red; /* Slight squeeze makes geometric fonts like Montreal look punchier */
 }
 
 .scroll-container {

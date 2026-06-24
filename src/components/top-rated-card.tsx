@@ -1,5 +1,6 @@
 import { Plus, Star } from "lucide-react";
 import { Button } from "./ui/button";
+import { useRecents } from "@/features/recents/useRecents";
 
 type TopRatedCardProps = {
   movie: any;
@@ -13,9 +14,13 @@ function TopRatedCard({
   handleWatchNow,
 }: TopRatedCardProps) {
   const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
+  const { updateRecents } = useRecents();
 
   return (
-    <article className="top-rated-card bg-neutral-0 relative isolate flex h-45 w-45 shrink-0 overflow-clip rounded-xl hover:shadow-lg">
+    <article
+      onClick={() => updateRecents(movie)}
+      className="top-rated-card bg-neutral-0 relative isolate flex h-45 w-45 shrink-0 overflow-clip rounded-xl hover:shadow-lg"
+    >
       <div className="mt-auto flex w-full flex-col gap-2 bg-linear-0 from-black/90 to-transparent p-4">
         <span className="absolute top-4 flex w-fit items-center gap-1 rounded-2xl bg-[#0c0c0c] p-1 px-2 text-[10.5px]">
           <Star stroke="#ffc729" fill="#ffc729" size={11} />

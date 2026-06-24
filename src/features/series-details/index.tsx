@@ -5,7 +5,6 @@ import { TMDB_API_KEY, TMDB_BASE_URL } from "../../config/env-config";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
 
-
 interface SeriesDetailData {
   id: number;
   name: string;

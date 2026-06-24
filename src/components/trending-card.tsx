@@ -1,5 +1,7 @@
 import { Plus } from "lucide-react";
 import { Button } from "./ui/button";
+import { useRecents } from "@/features/recents/useRecents";
+import { useBookmarks } from "@/features/bookmarks/useBookmarks";
 
 type TrendingCardProps = {
   movie: any;
@@ -13,10 +15,13 @@ function TrendingCard({
   handleWatchNow,
 }: TrendingCardProps) {
   const releaseYear = movie.first_air_date ? movie.first_air_date.substring(0, 4) : "2026";
+  const { updateRecents } = useRecents();
+  const { updateBookmarks } = useBookmarks();
 
   return (
     <article
       key={movie.id}
+      onClick={() => updateRecents(movie)}
       className="trending-card bg-neutral-0 relative isolate flex h-60 w-100 shrink-0 overflow-clip rounded-xl"
     >
       <div className="mt-auto flex h-full w-full items-end gap-2 bg-linear-0 from-black to-transparent p-6">
@@ -46,7 +51,7 @@ function TrendingCard({
           >
             Watch now
           </Button>
-          <Button className="flex items-center justify-center rounded-full bg-white/9 p-2.5 backdrop-blur-xl hover:bg-white/12">
+          <Button onClick={() => updateBookmarks(movie)} className="flex items-center justify-center rounded-full bg-white/9 p-2.5 backdrop-blur-xl hover:bg-white/12">
             <Plus size={17} />
           </Button>
         </div>

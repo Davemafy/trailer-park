@@ -106,7 +106,6 @@ export default function MovieDetails() {
 
   return (
     <div className="animate-fade-in w-full pt-3 pb-12">
-      {/* Sticky Top Back Button Layer */}
       <button
         onClick={() => navigate(-1)}
         className="mb-5 flex items-center gap-2 text-xs font-semibold text-[#969899] transition-colors hover:text-white"
@@ -166,7 +165,7 @@ export default function MovieDetails() {
             )}
           </div>
 
-          <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+          <h1 className="text-3xl font-semibold text-white md:text-4xl">
             {movie.title}
           </h1>
 

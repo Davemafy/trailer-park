@@ -36,8 +36,8 @@ export default function AppSidebar() {
   ];
 
   return (
-    <div className="w-54 bg-[#1a161f]">
-      <aside className="text-fade relative h-full shadow-2xl shadow-black">
+    <div className="w-54 h-full grid bg-[#1a161f]">
+      <aside className="text-fade relative shadow-2xl shadow-black">
         <nav className="flex h-full flex-col pt-16 pb-6 pl-6 text-smp">
           {/* Menu Section */}
           <div className="pb-5">
