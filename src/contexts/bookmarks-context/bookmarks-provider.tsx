@@ -10,7 +10,7 @@ export const BookmarksProvider = ({ children }: PropsWithChildren) => {
     setBookmarks((bookmarks) => [...bookmarks, movie]);
   };
   
-  const clearBookmarks = (movie: TMDBMovieResponse) => {
+  const clearBookmarks = () => {
     setBookmarks([])
   }
 
@@ -18,8 +18,8 @@ export const BookmarksProvider = ({ children }: PropsWithChildren) => {
     () => ({
       bookmarks,
       setBookmarks,
-      clearBookmarks,
       updateBookmarks,
+      clearBookmarks,
     }),
     [bookmarks, setBookmarks]
   );

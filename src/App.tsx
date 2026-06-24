@@ -17,7 +17,6 @@ import MovieDetails from "./features/movie-details";
 import TvShowsDetails from "./features/tv-shows-details";
 import SeriesDetails from "./features/series-details";
 import { RecentsProvider } from "./contexts/recents-context";
-import { Book } from "lucide-react";
 import { BookmarksProvider } from "./contexts/bookmarks-context";
 
 function App() {
@@ -28,10 +27,10 @@ function App() {
       <BookmarksProvider>
         <div className="bg-[#0d0c0f] text-white">
           {/* Navigation Menu */}
-          <div className="grid grid-cols-[min-content_1fr]">
+          <div className="grid h-screen grid-cols-[min-content_1fr]">
             {/* Side Bar*/}
             <AppSidebar />
-            <div className="">
+            <div className="h-screen">
               {/* Route Configuration */}
               <Routes>
                 <Route path="/" element={<Home />}>

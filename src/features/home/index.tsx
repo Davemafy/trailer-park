@@ -12,7 +12,7 @@ function Home() {
 
   return (
     <>
-        <div className="flex h-full w-full flex-col bg-[#0d0c0f] text-white">
+        <div className="flex full w-full flex-col bg-[#0d0c0f] text-white">
           {/* Top Nav */}
           <header className="border-b border-[#151517] p-6 py-5">
             <nav className="flex justify-between">

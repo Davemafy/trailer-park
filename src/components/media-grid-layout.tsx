@@ -33,7 +33,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
   console.log(location.pathname, location);
 
   return (
-    <div className="grid bg-amber-600 w-full gap-2">
+    <div className="grid w-full gap-2">
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
           <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl">

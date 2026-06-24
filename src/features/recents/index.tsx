@@ -7,7 +7,7 @@ const Recents = () => {
     <div className="p-6 py-4 grid gap-4">
       <h1 className="font-semibold">Recently Viewed</h1>
       <div className="flex flex-wrap gap-8">
-        {recents.map((item) => (
+        {recents?.map((item) => (
           <ContinueWatchingCard key={item.id} movie={item} handleWatchNow={() => alert("Incoming...")} />
         ))}
       </div>

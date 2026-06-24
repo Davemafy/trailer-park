@@ -36,9 +36,9 @@ export default function AppSidebar() {
   ];
 
   return (
-    <div className="w-54 h-full grid bg-[#1a161f]">
+    <div className="sm:grid hidden h-full w-54 bg-[#1a161f]">
       <aside className="text-fade relative shadow-2xl shadow-black">
-        <nav className="flex h-full flex-col pt-16 pb-6 pl-6 text-smp">
+        <nav className="text-smp flex h-full flex-col pt-16 pb-6 pl-6">
           {/* Menu Section */}
           <div className="pb-5">
             <h3 className="text-[11px]">MENU</h3>
