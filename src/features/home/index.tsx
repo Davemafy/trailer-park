@@ -52,7 +52,7 @@ function Home() {
                   <Bell size={20} />
                 </button>
               </li>
-              <li>
+              <li className="hidden sm:block">
                 <button className="flex">
                   <LayoutGrid className="fill-[#9698P99] hover:fill-white" size={20} />
                 </button>
