@@ -1,4 +1,4 @@
-import { Bell, LayoutGrid, Radio } from "lucide-react";
+import { Bell, LayoutGrid, Menu, Radio } from "lucide-react";
 import { NavLink, Outlet, useLocation } from "react-router";
 
 function Home() {
@@ -42,7 +42,7 @@ function Home() {
               })}
             </ul>
             <ul className="flex gap-8 text-[#969899]">
-              <li className="sm:block  hidden">
+              <li className="hidden sm:block">
                 <button>
                   <Radio size={20} />
                 </button>
@@ -55,6 +55,11 @@ function Home() {
               <li>
                 <button className="flex">
                   <LayoutGrid className="fill-[#9698P99] hover:fill-white" size={20} />
+                </button>
+              </li>
+              <li className=" sm:hidden">
+                <button>
+                  <Menu size={20} className="fill-[#9698P99] hover:fill-white" />
                 </button>
               </li>
             </ul>
