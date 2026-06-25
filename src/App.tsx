@@ -27,7 +27,7 @@ function App() {
       <BookmarksProvider>
         <div className="bg-[#0d0c0f] text-white">
           {/* Navigation Menu */}
-          <div className="grid h-screen grid-cols-[min-content_1fr]">
+          <div className="grid h-screen sm:grid-cols-[min-content_1fr]">
             {/* Side Bar*/}
             <AppSidebar />
             <div className="h-screen">
