@@ -14,8 +14,11 @@ import {
 } from "lucide-react";
 import type { ForwardRefExoticComponent, RefAttributes } from "react";
 import { NavLink, useLocation } from "react-router";
+import { useSidebar } from "../hooks/use-sidebar";
 
 export default function AppSidebar() {
+  const { sidebarOpen } = useSidebar();
+
   const menuGroup = [
     { to: "/", label: "Home", icon: House },
     { to: "/discovery", label: "Discovery", icon: Compass },
@@ -36,8 +39,8 @@ export default function AppSidebar() {
   ];
 
   return (
-    <div className="sm:grid hidden h-full w-54 bg-[#1a161f]">
-      <aside className="text-fade relative shadow-2xl shadow-black">
+    <div className={`${!sidebarOpen && "hidden"} fixed z-10 h-full w-54 bg-[#1a161f] sm:static sm:grid`}>
+      <aside className="text-fade relative shadow-2xl h-full shadow-black">
         <nav className="text-smp flex h-full flex-col pt-16 pb-6 pl-6">
           {/* Menu Section */}
           <div className="pb-5">

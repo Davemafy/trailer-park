@@ -1,7 +1,10 @@
-import { Bell, LayoutGrid, Menu, Radio } from "lucide-react";
+import { useSidebar } from "@/hooks/use-sidebar";
+import { Bell, LayoutGrid, Menu, Radio, X } from "lucide-react";
 import { NavLink, Outlet, useLocation } from "react-router";
 
 function Home() {
+  const { sidebarOpen, setSidebarOpen } = useSidebar()
+
   const menuItems = [
     { name: "Movies", to: "/" },
     { name: "Series", to: "/series" },
@@ -57,9 +60,10 @@ function Home() {
                   <LayoutGrid className="fill-[#9698P99] hover:fill-white" size={20} />
                 </button>
               </li>
-              <li className=" sm:hidden">
-                <button>
-                  <Menu size={20} className="fill-[#9698P99] hover:fill-white" />
+              <li className="sm:hidden">
+                <button onClick={() => setSidebarOpen(!sidebarOpen)}>
+                  {!sidebarOpen && <Menu size={20} className="fill-[#9698P99] hover:fill-white" />}
+                  {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
                 </button>
               </li>
             </ul>
