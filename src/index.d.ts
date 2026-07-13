@@ -1,6 +1,6 @@
 interface TMDBMovieResponse {
   adult: boolean;
-  backdrop_path: string | null;
+  backdrop_path: string | File | null;
   belongs_to_collection: TMDBCollection | null;
   budget: number;
   genres: TMDBGenre[];
@@ -12,7 +12,7 @@ interface TMDBMovieResponse {
   original_title: string;
   overview: string;
   popularity: number;
-  poster_path: string | null;
+  poster_path: string | File | null;
   production_companies: TMDBProductionCompany[];
   production_countries: TMDBProductionCountry[];
   release_date: string; // YYYY-MM-DD
@@ -23,9 +23,17 @@ interface TMDBMovieResponse {
   tagline: string | null;
   title?: string;
   name?: string;
+  category?: "trending" | "top-rated";
+  credits?: {
+    cast: TMDBCast[];
+  };
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+interface TMDBCast {
+  id: number; name: string; character: string; profile_path: string | File
 }
 
 interface TMDBGenre {

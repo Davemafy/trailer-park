@@ -5,6 +5,8 @@
 
 @theme {
   --color-fade: oklch(0.53 0.005 286);
+  --color-accent: #1d1c1ee1;
+  --breakpoint-xs: 295px;
 }
 
 :root {
@@ -40,7 +42,7 @@
     }
 
     &:hover {
-      @apply font-medium text-white;
+     color: #a9a6a6;
 
       svg {
         stroke: #b6101e;
@@ -96,9 +98,12 @@ html,
 body {
   height: 100vh;
   height: 100dvh;
+  
+  scroll-behavior: smooth;
 }
 
 body {
+
   font-family: "Apty";
 
   -webkit-font-smoothing: antialiased;
@@ -113,6 +118,11 @@ body {
   background-color: #0d0c0f;
   line-height: 1.5; /* Generous line height prevents crowded text */
   letter-spacing: -0.01em;
+
+}
+
+input {
+  width: 100%;
 }
 
 .scroll-container {

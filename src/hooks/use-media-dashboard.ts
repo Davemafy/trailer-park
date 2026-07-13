@@ -85,7 +85,6 @@ export function useMediaDashboard(mediaType: "movie" | "tv", genreId?: number) {
     setActiveVideoKey(null);
   };
 
-  console.log(trending)
 
   return {
     trending,

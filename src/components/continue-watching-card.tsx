@@ -1,6 +1,7 @@
 import { useRecents } from "@/features/recents/useRecents";
 import { Play } from "lucide-react";
 import { Link } from "react-router";
+import { SmartImg } from "./smart-img";
 
 type ContinueWatchingCardProps = {
   movie: any;
@@ -42,10 +43,12 @@ function ContinueWatchingCard({
         </div>
       </Link>
 
-      <img
+      <SmartImg
         className="movie-banner absolute -z-1 h-full w-full object-cover object-top"
-        src={`${IMAGE_BASE}${movie.backdrop_path}`}
-        alt=""
+        path={movie.backdrop_path}
+        fallback="/assets/img/placeholder.jpg"
+        baseUrl={IMAGE_BASE}
+        alt={movie.title}
       />
       <div
         onClick={(e) => {

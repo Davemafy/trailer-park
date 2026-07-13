@@ -3,7 +3,7 @@ import { Bell, LayoutGrid, Menu, Radio, X } from "lucide-react";
 import { NavLink, Outlet, useLocation } from "react-router";
 
 function Home() {
-  const { sidebarOpen, setSidebarOpen } = useSidebar()
+  const { sidebarOpen, setSidebarOpen } = useSidebar();
 
   const menuItems = [
     { name: "Movies", to: "/" },
@@ -15,12 +15,12 @@ function Home() {
 
   return (
     <>
-      <div className="flex h-full flex-col bg-[#0d0c0f] text-white">
+      <div className="grid h-full grid-rows-[min-content_1fr] bg-[#0d0c0f] text-white">
         {/* Top Nav */}
         <header className="border-b border-[#151517] p-6 py-5">
           <nav className="flex justify-between">
-            <ul className="text-fade flex gap-4 text-sm">
-              {menuItems.map((item) => {
+            <ul className="text-fade flex gap-3 text-sm">
+              {menuItems.map((item, index) => {
                 const isMoviesActive = item.to === "/" && location.pathname.includes("/movies/");
 
                 const isSeriesActive =
@@ -30,12 +30,12 @@ function Home() {
                   item.to === "/tv-shows" && location.pathname.includes("/tv-shows/");
 
                 return (
-                  <li>
+                  <li key={index}>
                     <NavLink
                       to={item.to}
                       end
                       className={({ isActive }) =>
-                        `font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
+                        `text-sm font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
                       }
                     >
                       {item.name}
@@ -44,7 +44,7 @@ function Home() {
                 );
               })}
             </ul>
-            <ul className="flex gap-8 text-[#969899]">
+            <ul className="flex gap-4 text-[#969899] sm:gap-8">
               <li className="hidden sm:block">
                 <button>
                   <Radio size={20} />
@@ -71,7 +71,7 @@ function Home() {
         </header>
 
         {/* Main Dashboard */}
-        <main className="scroll-container grid h-full w-full scrollbar-none overflow-y-auto p-6 py-0 pt-3 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <main className="scroll-container grid h-full w-full scrollbar-none overflow-x-auto overflow-y-auto p-6 pb-0 [-ms-overflow-style:none] sm:p-6 sm:pb-0 [&::-webkit-scrollbar]:hidden">
           <Outlet />
         </main>
       </div>
