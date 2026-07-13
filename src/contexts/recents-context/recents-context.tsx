@@ -4,6 +4,7 @@ interface RecentsContextType {
   recents: TMDBMovieResponse[];
   setRecents: Dispatch<SetStateAction<TMDBMovieResponse[]>>;
   updateRecents: (movie: TMDBMovieResponse) => void;
+  clearRecents: () => void;
   
 }
 
