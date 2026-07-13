@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# 🎬 Trailer Park
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A modern movie streaming application built with React 19, TypeScript, and a feature-first architecture inspired by JAM-Forte Engineering Standards.
 
-Currently, two official plugins are available:
+Unlike most movie apps built as UI showcases, Trailer Park focuses on maintainability, scalability, and clean frontend architecture—demonstrating how production React applications should be structured as they grow.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Project Dashboard](./src/assets/img/dahboard.png)
 
-## React Compiler
+## 🏗 Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Built around a feature-first architecture where every domain owns its components, hooks, and business logic.
 
-## Expanding the ESLint configuration
+- **Feature Isolation** — Prevents cross-feature coupling and improves scalability.
+- **Server State** — Powered by TanStack Query for caching and API synchronization.
+- **Client State** — Reserved for shared UI and session management.
+- **Consistent Conventions** — Kebab-case files, PascalCase components, and predictable project structure.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚡ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS 4
+- TanStack Query
+- shadcn/ui
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📂 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+├── components/
+├── config/
+├── contexts/
+├── features/
+├── services/
+└── utils/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+git clone https://github.com/Davemafy/trailer-park.git
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+npm install
+
+npm run dev
 ```
+
+## 🔒 Engineering Standards
+
+- Feature-first architecture
+- Clean separation of server and client state
+- No hard-coded secrets
+- Scalable folder organization
+- Production-oriented conventions

@@ -14,7 +14,6 @@ export default function Movies() {
     ],
   };
 
-  console.log(customMovies, data.trending)
 
   return <MediaGridLayout data={data} titlePrefix="movies" />;
 }

@@ -66,7 +66,6 @@ export default function MovieDetails() {
         }
         const data = await res.json();
         setMovie(data);
-        console.log(data)
       } catch (error) {
         console.error("Error retrieving movie details layout content:", error);
         setMovie((customMovies).find((item) => String(item.id) === id) ?? null);
