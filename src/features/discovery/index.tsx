@@ -3,6 +3,9 @@ import { useDiscoveryData } from "./use-discovery-data";
 import TopRatedCard from "@/components/top-rated-card";
 import { Link } from "react-router";
 
+import { useSidebar } from "@/hooks/use-sidebar";
+import { Menu, X } from "lucide-react";
+
 export default function Discovery() {
   const {
     searchQuery,
@@ -14,10 +17,12 @@ export default function Discovery() {
     loading,
   } = useDiscoveryData();
 
+  const { sidebarOpen, setSidebarOpen } = useSidebar();
+
   return (
-    <div className="text-h-full *:white flex h-screen w-full flex-col gap-4 bg-[#0d0c0f] p-4 px-6 pb-0">
+    <div className="grid h-full w-full grid-rows-[min-content_min-content_1fr] gap-4 overflow-x-auto bg-[#0d0c0f]">
       {/* Search Input Section Bar */}
-      <header className="relative flex w-full max-w-xl items-center">
+      <header className="relative mx-4 mt-4 flex max-w-xl items-center gap-6">
         <Search className="absolute left-4 h-5 w-5 text-zinc-500" />
         <input
           type="text"
@@ -27,18 +32,23 @@ export default function Discovery() {
             setSearchQuery(e.target.value);
           }}
           placeholder="Search movies, series, or documentals..."
-          className="w-full rounded-xl border border-zinc-800/60 bg-[#16151a] py-3 pr-4 pl-12 text-[15px] text-white placeholder-zinc-500 transition-colors outline-none focus:border-zinc-700"
+          className="rounded-xl border border-zinc-800/60 bg-[#16151a] py-3 pr-4 pl-12 text-[15px] text-white placeholder-zinc-500 transition-colors outline-none focus:border-zinc-700"
         />
+
+        <button className="block sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
+          {!sidebarOpen && <Menu size={20} className="fill-[#9698P99] hover:fill-white" />}
+          {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
+        </button>
       </header>
 
       {/* Genre Pills Row Container */}
-      <div className="mx-auto flex h-max w-full items-center gap-2.5 overflow-x-auto py-2 [&::-webkit-scrollbar]:hidden">
+      <div className="flex h-max w-full items-center gap-2.5 overflow-x-auto p-4 py-2 [&::-webkit-scrollbar]:hidden">
         <button
           onClick={() => {
             setSearchQuery("");
             setSelectedGenre(null);
           }}
-          className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-all ${
+          className={`text-sm rounded-full border px-4 py-1.5  font-medium whitespace-nowrap transition-all ${
             !selectedGenre && !searchQuery
               ? "border-[#f3182c] bg-[#f3182c] text-white"
               : "text-fade border-zinc-800 bg-transparent hover:text-white"
@@ -54,7 +64,7 @@ export default function Discovery() {
               setSearchQuery("");
               setSelectedGenre(genre.id);
             }}
-            className={`rounded-full border px-4 py-1.5 text-sm font-medium whitespace-nowrap transition-all ${
+            className={`text-sm rounded-full border px-4 py-1.5  font-medium whitespace-nowrap transition-all ${
               selectedGenre === genre.id
                 ? "border-[#f3182c] bg-[#f3182c] text-white"
                 : "text-fade border-zinc-800 bg-transparent hover:text-white"
@@ -66,11 +76,11 @@ export default function Discovery() {
       </div>
 
       {/* Content Feed Layout Grid Window */}
-      <div className="scroll-container 0 grid h-full w-full scrollbar-none overflow-y-auto pt-3 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <div className="scroll-container grid h-full w-full scrollbar-none overflow-y-auto p-4 pt-3 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {loading ? (
           <div className="text-zinc-500">Searching the database...</div>
         ) : results.length === 0 ? (
-          <div className="text-zinc-500">
+          <div className="text-sm  text-zinc-500">
             No items found matching criteria criteria. Try checking your keyword spellings.
           </div>
         ) : (
