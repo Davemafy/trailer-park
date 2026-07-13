@@ -2,10 +2,13 @@ import { Plus, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRecents } from "@/features/recents/useRecents";
 import { SmartImg } from "./smart-img";
+import clapboardFallback from "../assets/img/placeholder-image.svg";
+
 
 type TopRatedCardProps = {
   movie: any;
   IMAGE_BASE?: string;
+  className?: string;
   handleWatchNow: (movieId: string, movieTitle: string) => void;
 };
 
@@ -13,6 +16,7 @@ function TopRatedCard({
   movie,
   IMAGE_BASE = "https://image.tmdb.org/t/p/w1280",
   handleWatchNow,
+  className,
 }: TopRatedCardProps) {
   const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
   const { updateRecents } = useRecents();
@@ -20,7 +24,7 @@ function TopRatedCard({
   return (
     <article
       onClick={() => updateRecents(movie)}
-      className="top-rated-card bg-neutral-0 relative isolate flex h-45 w-45 shrink-0 overflow-clip rounded-xl hover:shadow-lg"
+      className={`top-rated-card bg-neutral-0 relative isolate  flex h-45 overflow-clip rounded-xl hover:shadow-lg ${className ?? ""}`}
     >
       <div className="mt-auto flex w-full flex-col gap-2 bg-linear-0 from-black/90 to-transparent p-4">
         <span className="absolute top-4 flex w-fit items-center gap-1 rounded-2xl bg-[#0c0c0c] p-1 px-2 text-[10.5px]">
@@ -53,7 +57,7 @@ function TopRatedCard({
         className="movie-banner absolute -z-10 h-full object-cover"
         path={movie.backdrop_path}
         baseUrl={IMAGE_BASE}
-        fallback="/assets/img/placeholder.jpg"
+        fallback={clapboardFallback}
         alt={movie.title}
       />
     </article>

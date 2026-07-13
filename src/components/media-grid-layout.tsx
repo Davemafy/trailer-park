@@ -69,7 +69,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
           </button>
         </header>
         <div className="scroll-container -mx-6 flex min-h-64 gap-2.5 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
-          {trending.slice(0, 10).map((item: any) => (
+          {trending.slice(0, 10).map((item)  => (
             <Link to={`${moviepath}/${item.id}`}>
               <TrendingCard key={item.id} movie={item} handleWatchNow={handleWatchNow} />
             </Link>

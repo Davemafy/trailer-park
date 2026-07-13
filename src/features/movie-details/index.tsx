@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import ReactPlayer from "react-player";
 import { useCustomMovies } from "@/hooks/use-custom-movies";
 import { SmartImg } from "@/components/smart-img";
+import clapboardFallback from "../../assets/img/placeholder-image.svg";
+import avatarPlaceholder from "../../assets/img/avatar-placeholder.png";
 
 
 export default function MovieDetails() {
@@ -144,7 +146,7 @@ export default function MovieDetails() {
       <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-[#151517]">
         <SmartImg
           path={movie.backdrop_path}
-          fallback={"assets/img/placeholder.jpg"}
+          fallback={clapboardFallback}
           alt={movie.title}
           baseUrl={IMAGE_BASE_URL}
           className="h-full w-full object-cover object-top"
@@ -206,7 +208,7 @@ export default function MovieDetails() {
                   >
                     <SmartImg
                       path={actor.profile_path}
-                      fallback="/avatar-placeholder.png"
+                      fallback={avatarPlaceholder}
                       alt={actor.name}
                       baseUrl={IMAGE_BASE_URL}
                       className="mb-1.5 h-12 w-12 rounded-full border border-zinc-800 object-cover"

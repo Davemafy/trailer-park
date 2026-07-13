@@ -32,7 +32,7 @@ function TrendingCard({
           <p className="movie-details text-xs">{releaseYear}</p>
           <div className="movie-details mt-1 flex items-center gap-1">
             <img
-              className="h-3" 
+              className="h-3"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/960px-IMDB_Logo_2016.svg.png?_=20200406194337"
               alt="imdb"
             />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface SmartImgProps {
   path: string | Blob | null;
@@ -13,14 +13,16 @@ export const SmartImg = ({ path, baseUrl = "", fallback, alt, className }: Smart
   const [errorFallback, setErrorFallback] = useState<string | null>(null);
   const [blobSrc, setBlobSrc] = useState<string | null>(null);
 
+  const imgRef = useRef<HTMLImageElement>(null);
+
   let derivedSrc = fallback;
   if (typeof path === "string") {
     derivedSrc = path.startsWith("/") ? `${baseUrl}${path}` : path;
   } else if (path instanceof Blob && blobSrc) {
-    derivedSrc = blobSrc; 
+    derivedSrc = blobSrc;
   }
 
-  const finalSrc = errorFallback ?? derivedSrc; 
+  const finalSrc = errorFallback ?? derivedSrc;
 
   useEffect(() => {
     setLoaded(false);
@@ -35,15 +37,20 @@ export const SmartImg = ({ path, baseUrl = "", fallback, alt, className }: Smart
       setBlobSrc(null);
     }
 
+    if (imgRef.current && imgRef.current.complete) {
+      setLoaded(true);
+    }
+
     return () => {
       if (currentBlobUrl) {
         URL.revokeObjectURL(currentBlobUrl);
       }
     };
-  }, [path]); 
+  }, [path]);
 
   return (
     <img
+      ref={imgRef}
       src={finalSrc}
       alt={alt}
       className={`${className ?? ""} transition-opacity duration-300 ${!loaded ? "opacity-0" : "opacity-100"}`}
