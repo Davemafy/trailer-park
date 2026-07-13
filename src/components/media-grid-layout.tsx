@@ -27,7 +27,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       {/* Trending Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base font-medium">Trending {titlePrefix.toLowerCase()}</h2>
+          <h2 className="text-base sm:text-sm font-medium">Trending {titlePrefix.toLowerCase()}</h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </button>
@@ -51,7 +51,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       {/* Popular / Continue Watching Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base font-medium">Continue watching</h2>
+          <h2 className="text-base sm:text-sm font-medium">Continue watching</h2>
           <Link to={"/recents"} className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </Link>
@@ -130,7 +130,7 @@ function DemoLoader({ titlePrefix }: DemoLoaderProps) {
       {/* Trending Loading Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base font-medium">Trending {titlePrefix.toLowerCase()}</h2>
+          <h2 className="text-base sm:text-sm font-medium">Trending {titlePrefix.toLowerCase()}</h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </button>
@@ -145,7 +145,7 @@ function DemoLoader({ titlePrefix }: DemoLoaderProps) {
       {/* Contrinue Watching Loading Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base font-medium">Continue watching</h2>
+          <h2 className="text-base sm:text-sm font-medium">Continue watching</h2>
           <Link to={"/recents"} className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </Link>

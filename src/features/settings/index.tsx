@@ -7,8 +7,8 @@ const Settings = () => {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6">
-        <h1 className="text-base">Settings</h1>
+      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6 sm:py-4">
+        <h1 className="text-base font-semibold">Settings</h1>
         <button
           onClick={() => alert("Coming soon!")}
           className="hidden rounded-full bg-neutral-900 p-2 px-5 text-sm sm:block"

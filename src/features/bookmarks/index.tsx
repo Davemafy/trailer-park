@@ -12,8 +12,8 @@ const Bookmarks = () => {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6">
-        <h1 className="text-base">Bookmarks</h1>
+      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6 sm:py-4">
+        <h1 className="text-base font-semibold">Bookmarks</h1>
         <button
           onClick={() => clearBookmarks()}
           className="hidden rounded-full bg-neutral-900 p-2 px-5 text-sm sm:block"
@@ -27,7 +27,7 @@ const Bookmarks = () => {
       </div>
       <div className="flex h-full flex-wrap gap-4 overflow-y-auto p-6 py-0 [&::-webkit-scrollbar]:hidden">
         {bookmarks.length == 0 && (
-          <div className="xs:text-sm text-[13px] text-zinc-500">
+          <div className="text-base text-zinc-400 sm:text-sm sm:text-zinc-500">
             No bookmarks yet, click the add movie button to add a bookmark.
           </div>
         )}

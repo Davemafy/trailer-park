@@ -18,9 +18,9 @@ export default function Discovery() {
   } = useDiscoveryData();
 
   const { sidebarOpen, setSidebarOpen } = useSidebar();
-  const { handleWatchNow } = useVideoPlayer()
+  const { handleWatchNow } = useVideoPlayer();
 
-  return (  
+  return (
     <div className="dicovery-page grid h-full w-full grid-rows-[min-content_1fr] overflow-x-auto bg-[#0d0c0f]">
       <header className="mt-4 flex w-full flex-col overflow-x-auto">
         {/* Search Input Section Bar */}
@@ -84,7 +84,7 @@ export default function Discovery() {
         {loading ? (
           <div className="text-zinc-500">Searching the database...</div>
         ) : results.length === 0 ? (
-          <div className="text-sm text-zinc-500">
+          <div className="text-base text-zinc-400 sm:text-sm sm:text-zinc-500">
             No items found matching criteria criteria. Try checking your keyword spellings.
           </div>
         ) : (

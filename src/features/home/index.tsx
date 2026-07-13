@@ -36,7 +36,7 @@ function Home() {
                       to={item.to}
                       end
                       className={({ isActive }) =>
-                        `text-base font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
+                        `text-base sm:text-sm font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
                       }
                     >
                       {item.name}
