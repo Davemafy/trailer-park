@@ -4,34 +4,23 @@ import { Plus, Star, ArrowLeft, Clock, Calendar, Globe } from "lucide-react";
 import { TMDB_API_KEY, TMDB_BASE_URL } from "../../config/env-config";
 import { Button } from "@/components/ui/button";
 import ReactPlayer from "react-player";
+import { useCustomMovies } from "@/hooks/use-custom-movies";
+import { SmartImg } from "@/components/smart-img";
 
-
-interface MovieDetailData {
-  id: number;
-  title: string;
-  original_title: string;
-  backdrop_path: string;
-  overview: string;
-  vote_average: number;
-  release_date: string;
-  runtime: number;
-  adult: boolean;
-  genres: { id: number; name: string }[];
-  credits?: {
-    cast: { id: number; name: string; character: string; profile_path: string }[];
-  };
-}
 
 export default function MovieDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const [movie, setMovie] = useState<MovieDetailData | null>(null);
+  const { customMovies } = useCustomMovies();
+
+  const [movie, setMovie] = useState< TMDBMovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const [activeVideoKey, setActiveVideoKey] = useState<string | null>(null);
   const [playingTitle, setPlayingTitle] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleWatchNow = async (mediaId: number, mediaTitle: string) => {
     setIsModalOpen(true);
@@ -48,7 +37,7 @@ export default function MovieDetails() {
         setActiveVideoKey(trailer.key);
         setPlayingTitle(mediaTitle);
       } else {
-        alert("Trailer preview not available for this title.");
+      alert("Trailer preview not available for this title.");
         setIsModalOpen(false);
       }
     } catch (err) {
@@ -71,15 +60,26 @@ export default function MovieDetails() {
       try {
         const url = `${TMDB_BASE_URL}/movie/${id}?api_key=${TMDB_API_KEY}&append_to_response=credits`;
         const res = await fetch(url);
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
         setMovie(data);
+        console.log(data)
       } catch (error) {
         console.error("Error retrieving movie details layout content:", error);
+        setMovie((customMovies).find((item) => String(item.id) === id) ?? null);
       } finally {
         setLoading(false);
       }
     }
-    if (id) fetchMovieDetails();
+
+    if (id && id !== "null" && id !== "undefined") {
+      fetchMovieDetails();
+    } else {
+      setLoading(false);
+    }
   }, [id]);
 
   if (loading) {
@@ -141,17 +141,19 @@ export default function MovieDetails() {
         </div>
       )}
 
-      {/* Cinematic Banner Canvas Area */}
+      {/* Cinematic Banner */}
       <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-[#151517]">
-        <img
-          src={movie.backdrop_path ? `${IMAGE_BASE_URL}${movie.backdrop_path}` : "/placeholder.jpg"}
+        <SmartImg
+          path={movie.backdrop_path}
+          fallback={"assets/img/placeholder.jpg"}
           alt={movie.title}
+          baseUrl={IMAGE_BASE_URL}
           className="h-full w-full object-cover object-top"
         />
-        {/* Dark Gradient Mask for text clarity */}
+        {/* Dark Gradient Mask*/}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0c0f] via-[#0d0c0f]/40 to-transparent" />
 
-        {/* Floating Content Overlays */}
+        {/* Floating Content */}
         <div className="absolute right-0 bottom-0 left-0 flex flex-col items-start gap-3 p-6">
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1 rounded border border-zinc-800 bg-[#1c1a22] px-2 py-0.5 text-xs font-medium text-amber-400">
@@ -165,14 +167,12 @@ export default function MovieDetails() {
             )}
           </div>
 
-          <h1 className="text-3xl font-semibold text-white md:text-4xl">
-            {movie.title}
-          </h1>
+          <h1 className="text-3xl font-semibold text-white md:text-4xl">{movie.title}</h1>
 
-          {/* Action Triggers Grid Block Row */}
+          {/* Action Triggers */}
           <div className="mt-1 flex items-center gap-3">
             <Button
-              onClick={() => handleWatchNow(movie.id, movie.title)}
+              onClick={() => handleWatchNow(movie.id, movie.title || "Trailer")}
               className="rounded-full bg-[#9f0922a1] p-2 px-4 text-sm transition-colors hover:bg-[#9f0922]"
             >
               Watch now
@@ -184,9 +184,9 @@ export default function MovieDetails() {
         </div>
       </div>
 
-      {/* Main Content Layout Grid Columns Split */}
+      {/* Main Content */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {/* Left Side Content Area Container */}
+        {/* Left Side Content */}
         <div className="flex flex-col gap-6 lg:col-span-2">
           <div>
             <h2 className="mb-2 text-sm font-semibold text-zinc-400">Synopsis</h2>
@@ -205,13 +205,11 @@ export default function MovieDetails() {
                     key={actor.id}
                     className="flex max-w-[75px] min-w-[75px] flex-col items-center text-center"
                   >
-                    <img
-                      src={
-                        actor.profile_path
-                          ? `${IMAGE_BASE_URL}${actor.profile_path}`
-                          : "/avatar-placeholder.png"
-                      }
+                    <SmartImg
+                      path={actor.profile_path}
+                      fallback="/avatar-placeholder.png"
                       alt={actor.name}
+                      baseUrl={IMAGE_BASE_URL}
                       className="mb-1.5 h-12 w-12 rounded-full border border-zinc-800 object-cover"
                     />
                     <span className="w-full truncate text-xs font-medium text-white">
