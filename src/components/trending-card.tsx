@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRecents } from "@/features/recents/useRecents";
 import { useBookmarks } from "@/features/bookmarks/useBookmarks";
+import { SmartImg } from "./smart-img";
 
 type TrendingCardProps = {
   movie: any;
@@ -14,7 +15,7 @@ function TrendingCard({
   IMAGE_BASE = "https://image.tmdb.org/t/p/w1280",
   handleWatchNow,
 }: TrendingCardProps) {
-  const releaseYear = movie.first_air_date ? movie.first_air_date.substring(0, 4) : "2026";
+  const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "2026";
   const { updateRecents } = useRecents();
   const { updateBookmarks } = useBookmarks();
 
@@ -31,7 +32,7 @@ function TrendingCard({
           <p className="movie-details text-xs">{releaseYear}</p>
           <div className="movie-details mt-1 flex items-center gap-1">
             <img
-              className="h-3"
+              className="h-3" 
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/960px-IMDB_Logo_2016.svg.png?_=20200406194337"
               alt="imdb"
             />
@@ -51,15 +52,20 @@ function TrendingCard({
           >
             Watch now
           </Button>
-          <Button onClick={() => updateBookmarks(movie)} className="flex items-center justify-center rounded-full bg-white/9 p-2.5 backdrop-blur-xl hover:bg-white/12">
+          <Button
+            onClick={() => updateBookmarks(movie)}
+            className="flex items-center justify-center rounded-full bg-white/9 p-2.5 backdrop-blur-xl hover:bg-white/12"
+          >
             <Plus size={17} />
           </Button>
         </div>
       </div>
-      <img
+      <SmartImg
         className="movie-banner absolute -z-10 h-full object-cover"
-        src={`${IMAGE_BASE}${movie.backdrop_path}`}
-        alt=""
+        path={movie.backdrop_path}
+        fallback={"assets/img/placeholder.jpg"}
+        baseUrl={IMAGE_BASE}
+        alt={movie.title}
       />
     </article>
   );

@@ -1,6 +1,7 @@
 import { Plus, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRecents } from "@/features/recents/useRecents";
+import { SmartImg } from "./smart-img";
 
 type TopRatedCardProps = {
   movie: any;
@@ -48,10 +49,12 @@ function TopRatedCard({
           </Button>
         </div>
       </div>
-      <img
+      <SmartImg
         className="movie-banner absolute -z-10 h-full object-cover"
-        src={`${IMAGE_BASE}${movie.backdrop_path}`}
-        alt=""
+        path={movie.backdrop_path}
+        baseUrl={IMAGE_BASE}
+        fallback="/assets/img/placeholder.jpg"
+        alt={movie.title}
       />
     </article>
   );
