@@ -24,6 +24,7 @@ interface TMDBMovieResponse {
   title?: string;
   name?: string;
   category?: "trending" | "top-rated";
+  type?: "movie" | "tv";
   credits?: {
     cast: TMDBCast[];
   };
@@ -64,5 +65,14 @@ interface TMDBSpokenLanguage {
   english_name: string;
   iso_639_1: string;
   name: string;
+}
+
+
+
+type MediaDashboardType = {
+  trending: TMDBMovieResponse[];
+  popular: TMDBMovieResponse[];
+  topRated: TMDBMovieResponse[];
+  loading: boolean;
 }
 

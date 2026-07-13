@@ -1,3 +1,4 @@
+import VideoPlayer from "@/components/video-player";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { Bell, LayoutGrid, Menu, Radio, X } from "lucide-react";
 import { NavLink, Outlet, useLocation } from "react-router";
@@ -35,7 +36,7 @@ function Home() {
                       to={item.to}
                       end
                       className={({ isActive }) =>
-                        `text-sm font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
+                        `text-base font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
                       }
                     >
                       {item.name}
@@ -69,6 +70,8 @@ function Home() {
             </ul>
           </nav>
         </header>
+
+        <VideoPlayer />
 
         {/* Main Dashboard */}
         <main className="scroll-container grid h-full w-full scrollbar-none overflow-x-auto overflow-y-auto p-6 pb-0 [-ms-overflow-style:none] sm:p-6 sm:pb-0 [&::-webkit-scrollbar]:hidden">

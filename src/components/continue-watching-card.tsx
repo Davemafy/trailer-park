@@ -2,33 +2,34 @@ import { useRecents } from "@/features/recents/useRecents";
 import { Play } from "lucide-react";
 import { Link } from "react-router";
 import { SmartImg } from "./smart-img";
+import type { VideoPlayerContextType } from "@/contexts/video-player-context";
 
 type ContinueWatchingCardProps = {
-  movie: any;
+  media: TMDBMovieResponse;
   IMAGE_BASE?: string;
-  handleWatchNow: (movieId: string, movieTitle: string) => void;
+  handleWatchNow: VideoPlayerContextType["handleWatchNow"];
 };
 
 function ContinueWatchingCard({
-  movie,
+  media,
   IMAGE_BASE = "https://image.tmdb.org/t/p/w1280",
   handleWatchNow,
 }: ContinueWatchingCardProps) {
-  const releaseYear = movie.release_date ? movie.release_date.substring(0, 4) : "";
-  const { updateRecents } = useRecents()
+  const releaseYear = media.release_date ? media.release_date.substring(0, 4) : "";
+  const { updateRecents } = useRecents();
 
   return (
     <article
-      onClick={() => updateRecents(movie)}
+      onClick={() => updateRecents(media)}
       className="continue-watching-card bg-neutral-0 relative isolate flex h-50 w-70 shrink-0 overflow-clip rounded-xl"
     >
       <Link
-        to={`/movies/${movie.id}`}
+        to={`/medias/${media.id}`}
         className="mt-auto flex h-full w-full items-end gap-2 bg-linear-0 from-black/90 to-transparent p-6 px-6.5"
       >
         <div className="relative z-10 flex flex-1 cursor-default flex-col gap-2">
           <div>
-            <h3 className="max-w-[90%] truncate text-base font-semibold">{movie.title}</h3>
+            <h3 className="max-w-[90%] truncate text-base font-semibold">{media.title}</h3>
             <p className="text-[11px]">{releaseYear}</p>
           </div>
           <div className="flex items-center gap-1.5 text-[9px]">
@@ -44,22 +45,24 @@ function ContinueWatchingCard({
       </Link>
 
       <SmartImg
-        className="movie-banner absolute -z-1 h-full w-full object-cover object-top"
-        path={movie.backdrop_path}
+        className="media-banner absolute -z-1 h-full w-full object-cover object-top"
+        path={media.backdrop_path}
         fallback="/assets/img/placeholder.jpg"
         baseUrl={IMAGE_BASE}
-        alt={movie.title}
+        alt={media.title}
       />
       <div
         onClick={(e) => {
           if (e.target === e.currentTarget) {
-            handleWatchNow(movie.id, movie.title);
+            handleWatchNow(media.id, media.title ?? "Selected Movie", media.type ?? "movie");
           }
         }}
         className="absolute inset-0 z-1 grid cursor-pointer place-items-center"
       >
         <button
-          onClick={() => handleWatchNow(movie.id, movie.title)}
+          onClick={() =>
+            handleWatchNow(media.id, media.title ?? "Selected Movie", media.type ?? "movie")
+          }
           className="rounded-full bg-white/15 p-2 backdrop-blur-xs transition"
         >
           <Play size={12} fill="white" />

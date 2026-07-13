@@ -7,7 +7,7 @@ const TopRated = () => {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-4">
+      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6">
         <h1 className="text-base">Top Rated</h1>
         <button
           onClick={() => alert("Coming soon!")}

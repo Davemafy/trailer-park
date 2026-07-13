@@ -3,14 +3,16 @@ import { useBookmarks } from "./useBookmarks";
 import { Link } from "react-router";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { Menu, X } from "lucide-react";
+import { useVideoPlayer } from "@/hooks/use-video-player";
 
 const Bookmarks = () => {
   const { bookmarks, clearBookmarks } = useBookmarks();
   const { sidebarOpen, setSidebarOpen } = useSidebar();
+  const { handleWatchNow } = useVideoPlayer();
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-4">
+      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6">
         <h1 className="text-base">Bookmarks</h1>
         <button
           onClick={() => clearBookmarks()}
@@ -31,7 +33,7 @@ const Bookmarks = () => {
         )}
         {bookmarks.map((item) => (
           <Link to={`/movies/${item.id}`}>
-            <TrendingCard key={item.id} movie={item} handleWatchNow={() => alert("Incoming...")} />
+            <TrendingCard key={item.id} media={item} handleWatchNow={handleWatchNow} />
           </Link>
         ))}
       </div>

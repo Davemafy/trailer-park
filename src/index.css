@@ -121,6 +121,11 @@ body {
 
 }
 
+.dicovery-page  .top-rated-card{
+ /* width: 100% !important; */
+ /* flex: 1; */
+}
+
 input {
   width: 100%;
 }

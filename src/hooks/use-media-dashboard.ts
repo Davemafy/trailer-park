@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import { TMDB_API_KEY, TMDB_BASE_URL } from "../config/env-config";
 
-export function useMediaDashboard(mediaType: "movie" | "tv", genreId?: number) {
+
+
+export function useMediaDashboard(mediaType: "movie" | "tv", genreId?: number): MediaDashboardType {
   const [trending, setTrending] = useState<TMDBMovieResponse[]>([]);
   const [popular, setPopular] = useState<TMDBMovieResponse[]>([]);
   const [topRated, setTopRated] = useState<TMDBMovieResponse[]>([]);
   const [loading, setLoading] = useState(true);
 
- 
-  const [activeVideoKey, setActiveVideoKey] = useState<string | null>(null);
-  const [playingTitle, setPlayingTitle] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchDashboardContent() {
@@ -40,6 +38,7 @@ export function useMediaDashboard(mediaType: "movie" | "tv", genreId?: number) {
           (items || []).map((item) => ({
             ...item,
             title: item.title || item.name,
+            type: mediaType,
           }));
 
         setTrending(normalize(trendingData.results));
@@ -55,47 +54,12 @@ export function useMediaDashboard(mediaType: "movie" | "tv", genreId?: number) {
     fetchDashboardContent();
   }, [mediaType, genreId]);
 
-  const handleWatchNow = async (mediaId: number, mediaTitle: string) => {
-    setIsModalOpen(true);
-    try {
-      const videoUrl = `${TMDB_BASE_URL}/${mediaType}/${mediaId}/videos?api_key=${TMDB_API_KEY}`;
-      const res = await fetch(videoUrl);
-      const data = await res.json();
-
-      const trailer = data.results?.find(
-        (vid: any) => vid.site === "YouTube" && (vid.type === "Trailer" || vid.type === "Teaser")
-      );
-
-      if (trailer) {
-        setActiveVideoKey(trailer.key);
-        setPlayingTitle(mediaTitle);
-      } else {
-        alert("Trailer preview not available for this title.");
-        setIsModalOpen(false);
-      }
-    } catch (err) {
-      console.error("Error fetching video metadata:", err);
-      setIsModalOpen(false);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setPlayingTitle(null);
-    setActiveVideoKey(null);
-  };
-
 
   return {
     trending,
     popular,
     topRated,
     loading,
-    activeVideoKey,
-    playingTitle,
-    isModalOpen,
-    handleWatchNow,
-    handleCloseModal,
   };
 
 }

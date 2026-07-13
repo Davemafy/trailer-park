@@ -3,14 +3,16 @@ import { useRecents } from "./useRecents";
 import ContinueWatchingCard from "@/components/continue-watching-card";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { Menu, X } from "lucide-react";
+import { useVideoPlayer } from "@/hooks/use-video-player";
 
 const Recents = () => {
   const { recents, clearRecents } = useRecents();
   const { sidebarOpen, setSidebarOpen } = useSidebar();
+  const { handleWatchNow } = useVideoPlayer()
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <div className="py- flex items-center justify-between border-b border-[#151517] p-6 py-4">
+      <div className="py- flex items-center justify-between border-b border-[#151517] p-6 py-6">
         <h1 className="text-base">Recents</h1>
         <button
           onClick={() => clearRecents()}
@@ -33,8 +35,8 @@ const Recents = () => {
           <Link to={`/movies/${item.id}`}>
             <ContinueWatchingCard
               key={item.id}
-              movie={item}
-              handleWatchNow={() => alert("Incoming...")}
+              media={item}
+              handleWatchNow={handleWatchNow}
             />
           </Link>
         ))}

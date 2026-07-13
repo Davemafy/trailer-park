@@ -23,6 +23,7 @@ import { SidebarProvider } from "./contexts/sidebar-context";
 import AddSeries from "./features/add-series";
 import { CustomMoviesProvider } from "./contexts/custom-movies-context";
 import { useSidebar } from "./hooks/use-sidebar";
+import { VideoPlayerProvider } from "./contexts/video-player-context";
 
 function App() {
   return (
@@ -31,7 +32,9 @@ function App() {
         <CustomMoviesProvider>
           <RecentsProvider>
             <BookmarksProvider>
-              <Dashboard />
+              <VideoPlayerProvider>
+                <Dashboard />
+              </VideoPlayerProvider>
             </BookmarksProvider>
           </RecentsProvider>
         </CustomMoviesProvider>
@@ -46,7 +49,7 @@ function Dashboard() {
   return (
     <div className="bg-[#0d0c0f] text-white">
       {/* Navigation Menu */}
-      <div className="grid h-screen md:grid-cols-[min-content_1fr] overflow-hidden">
+      <div className="grid h-screen overflow-hidden md:grid-cols-[min-content_1fr]">
         {/* Side Bar*/}
         <AppSidebar />
         <div className={`h-screen transition ${sidebarOpen && "translate-x-50.75"}`}>
