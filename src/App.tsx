@@ -16,49 +16,66 @@ import TvShows from "./features/tv-shows/";
 import MovieDetails from "./features/movie-details";
 import TvShowsDetails from "./features/tv-shows-details";
 import SeriesDetails from "./features/series-details";
+import AddMovie from "./features/add-movie";
 import { RecentsProvider } from "./contexts/recents-context";
 import { BookmarksProvider } from "./contexts/bookmarks-context";
 import { SidebarProvider } from "./contexts/sidebar-context";
+import AddSeries from "./features/add-series";
+import { CustomMoviesProvider } from "./contexts/custom-movies-context";
+import { useSidebar } from "./hooks/use-sidebar";
 
 function App() {
   return (
     <>
       <SidebarProvider>
-        <RecentsProvider>
-          <BookmarksProvider>
-            <div className="bg-[#0d0c0f] text-white">
-              {/* Navigation Menu */}
-              <div className="grid h-screen sm:grid-cols-[min-content_1fr]">
-                {/* Side Bar*/}
-                <AppSidebar />
-                <div className="h-screen">
-                  {/* Route Configuration */}
-                  <Routes>
-                    <Route path="/" element={<Home />}>
-                      <Route index element={<Movies />} />
-                      <Route path="series" element={<Series />} />
-                      <Route path="tv-shows" element={<TvShows />} />
-                      <Route path="movies/:id" element={<MovieDetails />} />
-                      <Route path="tv-shows/:id" element={<TvShowsDetails />} />
-                      <Route path="series/:id" element={<SeriesDetails />} />
-                    </Route>
-                    <Route path="/discovery" element={<Discovery />} />
-                    <Route path="/community" element={<Community />} />
-                    <Route path="/coming-soon" element={<ComingSoon />} />
-                    <Route path="/recents" element={<Recents />} />
-                    <Route path="/bookmarks" element={<Bookmarks />} />
-                    <Route path="/top-rated" element={<TopRated />} />
-                    <Route path="/downloads" element={<Downloads />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/help" element={<Help />} />
-                  </Routes>
-                </div>
-              </div>
-            </div>
-          </BookmarksProvider>
-        </RecentsProvider>
+        <CustomMoviesProvider>
+          <RecentsProvider>
+            <BookmarksProvider>
+              <Dashboard />
+            </BookmarksProvider>
+          </RecentsProvider>
+        </CustomMoviesProvider>
       </SidebarProvider>
     </>
+  );
+}
+
+function Dashboard() {
+  const { sidebarOpen } = useSidebar();
+
+  return (
+    <div className="bg-[#0d0c0f] text-white">
+      {/* Navigation Menu */}
+      <div className="grid h-screen md:grid-cols-[min-content_1fr] overflow-hidden">
+        {/* Side Bar*/}
+        <AppSidebar />
+        <div className={`h-screen transition ${sidebarOpen && "translate-x-50.75"}`}>
+          {/* Route Configuration */}
+          <Routes>
+            <Route path="/" element={<Home />}>
+              <Route index element={<Movies />} />
+              <Route path="series" element={<Series />} />
+              <Route path="tv-shows" element={<TvShows />} />
+              <Route path="movies/add" element={<AddMovie />} />
+              <Route path="series/add" element={<AddSeries />} />
+              <Route path="tv-shows/add" element={<AddMovie />} />
+              <Route path="movies/:id" element={<MovieDetails />} />
+              <Route path="tv-shows/:id" element={<TvShowsDetails />} />
+              <Route path="series/:id" element={<SeriesDetails />} />
+            </Route>
+            <Route path="/discovery" element={<Discovery />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/coming-soon" element={<ComingSoon />} />
+            <Route path="/recents" element={<Recents />} />
+            <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route path="/top-rated" element={<TopRated />} />
+            <Route path="/downloads" element={<Downloads />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/help" element={<Help />} />
+          </Routes>
+        </div>
+      </div>
+    </div>
   );
 }
 

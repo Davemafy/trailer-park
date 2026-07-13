@@ -17,7 +17,7 @@ import { NavLink, useLocation } from "react-router";
 import { useSidebar } from "../hooks/use-sidebar";
 
 export default function AppSidebar() {
-  const { sidebarOpen } = useSidebar();
+  const { sidebarOpen, setSidebarOpen } = useSidebar();
 
   const menuGroup = [
     { to: "/", label: "Home", icon: House },
@@ -38,59 +38,67 @@ export default function AppSidebar() {
     { to: "/help", label: "Help", icon: Info },
   ];
 
+   const closeSidebar = () => setSidebarOpen(false);
+
   return (
-    <div className={`${!sidebarOpen && "hidden"} fixed z-10 h-full w-54 bg-[#1a161f] sm:static sm:grid`}>
-      <aside className="text-fade relative shadow-2xl h-full shadow-black">
-        <nav className="text-smp flex h-full flex-col pt-16 pb-6 pl-6">
-          {/* Menu Section */}
-          <div className="pb-5">
-            <h3 className="text-[11px]">MENU</h3>
-            <ul className="relative flex flex-col gap-4 pt-3">
-              {menuGroup.map((item) => (
-                <SidebarLink key={item.to} {...item} />
-              ))}
-              <li className="bg-fade/9 absolute -bottom-5.25 h-px w-[89%]"></li>
-            </ul>
-          </div>
+    <aside
+      className={`fixed top-0 z-30 flex h-full w-50 shrink-0 flex-col bg-inherit text-[0.8rem] transition md:static md:transition-none ${!sidebarOpen ? "-translate-x-[110%] md:translate-0" : "md:w-60"}`}
+    >
+      <div
+        onClick={closeSidebar}
+        className={`absolute top-0 -z-10 h-full w-screen backdrop-blur-[0.2rem] sm:hidden ${sidebarOpen ? "bg-[#36363618] opacity-100 transition" : "-translate-x-2/3 opacity-0"}`}
+      ></div>
 
-          {/* Libary Section */}
-          <div className="py-5">
-            <h3 className="text-[11px]">LIBRARY</h3>
-            <ul className="relative flex flex-col gap-4 pt-3">
-              {libraryGroup.map((item) => (
-                <SidebarLink key={item.to} {...item} />
-              ))}
-              <li className="bg-fade/9 absolute -bottom-5.25 h-px w-[89%]"></li>
-            </ul>
-          </div>
+      <nav className="text-base flex h-full flex-col bg-[#1a161f] gap-4 sm:gap-0 pt-16 pb-6 pl-6">
+        {/* Menu Section */}
+        <div className="pb-5">
+          <h3 className="text-[11px]">MENU</h3>
+          <ul className="relative flex flex-col gap-4 pt-3">
+            {menuGroup.map((item) => (
+              <SidebarLink key={item.to} closeSidebar={closeSidebar} {...item} />
+            ))}
+            <li className="bg-fade/9 absolute -bottom-5.25 h-px w-[89%]"></li>
+          </ul>
+        </div>
 
-          {/* Utility Section */}
-          <div>
-            <ul className="flex flex-col gap-4 pt-4">
-              {utilityGroup.map((item) => (
-                <SidebarLink key={item.to} {...item} />
-              ))}
-            </ul>
-          </div>
-          <div className="mt-auto">
-            <button className="select-none" onClick={() => alert("You are signed out!")}>
-              <LogOut size={17} />
-              <p>Logout</p>
-            </button>
-          </div>
-        </nav>
-      </aside>
-    </div>
+        {/* Libary Section */}
+        <div className="py-5">
+          <h3 className="text-[11px]">LIBRARY</h3>
+          <ul className="relative flex flex-col gap-4 pt-3">
+            {libraryGroup.map((item) => (
+              <SidebarLink key={item.to} closeSidebar={closeSidebar} {...item} />
+            ))}
+            <li className="bg-fade/9 absolute -bottom-5.25 h-px w-[89%]"></li>
+          </ul>
+        </div>
+
+        {/* Utility Section */}
+        <div>
+          <ul className="flex flex-col gap-4 pt-4">
+            {utilityGroup.map((item) => (
+              <SidebarLink key={item.to} closeSidebar={closeSidebar} {...item} />
+            ))}
+          </ul>
+        </div>
+        <div className="mt-auto">
+          <button className="select-none" onClick={() => alert("You are signed out!")}>
+            <LogOut size={17} />
+            <p>Logout</p>
+          </button>
+        </div>
+      </nav>
+    </aside>
   );
 }
 
 type SidebarLinkProps = {
   to: string;
   label: string;
+  closeSidebar: () => void;
   icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
 };
 
-function SidebarLink({ to, label, icon: Icon }: SidebarLinkProps) {
+function SidebarLink({ to, label, icon: Icon, closeSidebar }: SidebarLinkProps) {
   const location = useLocation();
 
   const isHomeActive =
@@ -106,9 +114,10 @@ function SidebarLink({ to, label, icon: Icon }: SidebarLinkProps) {
     <li>
       <NavLink
         to={to}
+        onClick={closeSidebar}
         className={({ isActive }) =>
           `relative flex items-center gap-3 transition-colors ${
-            isActive || isHomeActive ? "font-medium text-white" : "text-fade hover:text-white"
+            isActive || isHomeActive ? "text-white" : "text-fade"
           }`
         }
       >
