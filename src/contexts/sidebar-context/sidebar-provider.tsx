@@ -2,7 +2,7 @@ import { useMemo, useState, type PropsWithChildren } from "react";
 import { SidebarContext } from "./sidebar-context";
 
 export const SidebarProvider = ({ children }: PropsWithChildren) => {
-  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   const providerValue = useMemo(
     () => ({
