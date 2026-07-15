@@ -55,13 +55,16 @@ function Dashboard() {
         <AppSidebar />
         <VideoPlayer />
 
-        <div className={`h-screen transition ${sidebarOpen && "translate-x-50.75 sm:-translate-x-0"}`}>
+        <div
+          className={`h-screen transition ${sidebarOpen && "translate-x-50.75 sm:-translate-x-0"}`}
+        >
           {/* Route Configuration */}
           <Routes>
             <Route path="/" element={<Home />}>
               <Route index element={<Movies />} />
               <Route path="series" element={<Series />} />
               <Route path="tv-shows" element={<TvShows />} />
+              <Route path="movies/" element={<Movies />} />
               <Route path="movies/add" element={<AddMovie />} />
               <Route path="series/add" element={<AddSeries />} />
               <Route path="tv-shows/add" element={<AddMovie />} />

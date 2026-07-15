@@ -3,54 +3,21 @@ import { useParams, useNavigate } from "react-router";
 import { Plus, Star, ArrowLeft, Clock, Calendar, Globe, Trash2 } from "lucide-react";
 import { TMDB_API_KEY, TMDB_BASE_URL } from "../../config/env-config";
 import { Button } from "@/components/ui/button";
-import ReactPlayer from "react-player";
 import { useCustomMovies } from "@/hooks/use-custom-movies";
 import { SmartImg } from "@/components/smart-img";
 import clapboardFallback from "../../assets/img/placeholder-image.svg";
 import avatarPlaceholder from "../../assets/img/avatar-placeholder.png";
+import { useVideoPlayer } from "@/hooks/use-video-player";
 
 export default function MovieDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
   const { customMovies, deleteCustomMovie } = useCustomMovies();
+  const { handleWatchNow } = useVideoPlayer();
 
   const [movie, setMovie] = useState<TMDBMovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const [activeVideoKey, setActiveVideoKey] = useState<string | null>(null);
-  const [playingTitle, setPlayingTitle] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleWatchNow = async (mediaId: number, mediaTitle: string) => {
-    setIsModalOpen(true);
-    try {
-      const videoUrl = `${TMDB_BASE_URL}/movies/${mediaId}/videos?api_key=${TMDB_API_KEY}`;
-      const res = await fetch(videoUrl);
-      const data = await res.json();
-
-      const trailer = data.results?.find(
-        (vid: any) => vid.site === "YouTube" && (vid.type === "Trailer" || vid.type === "Teaser")
-      );
-
-      if (trailer) {
-        setActiveVideoKey(trailer.key);
-        setPlayingTitle(mediaTitle);
-      } else {
-        alert("Trailer preview not available for this title.");
-        setIsModalOpen(false);
-      }
-    } catch (err) {
-      console.error("Error fetching video metadata:", err);
-      setIsModalOpen(false);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setPlayingTitle(null);
-    setActiveVideoKey(null);
-  };
 
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w1280";
 
@@ -105,39 +72,16 @@ export default function MovieDetails() {
 
   return (
     <div className="animate-fade-in w-full pb-12">
-      <button
+      <div
         onClick={() => navigate(-1)}
         className="mb-5 flex items-center gap-2 text-xs font-semibold text-[#969899] transition-colors hover:text-white"
       >
-        <ArrowLeft size={14} />
-        Back
-      </button>
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-zinc-800/50 bg-zinc-900/50 px-6 py-4">
-              <h3 className="truncate text-lg font-medium text-white">
-                {playingTitle ? `Now playing: ${playingTitle}` : "Watch Trailer"}
-              </h3>
-              <button
-                onClick={handleCloseModal}
-                className="rounded-full bg-zinc-800/50 p-2 px-3 text-sm text-zinc-400 transition-all hover:bg-zinc-800 hover:text-white"
-              >
-                ✕ Close
-              </button>
-            </div>
-            <div className="relative flex aspect-video w-full items-center justify-center bg-black">
-              <ReactPlayer
-                src={`https://youtube.com/watch?v=${activeVideoKey}`}
-                controls
-                playing
-                height="100%"
-                width="100%"
-              />
-            </div>
-          </div>
-        </div>
-      )}
+        <button className="flex items-center text-xs font-semibold text-[#969899] transition-colors hover:text-white">
+          <ArrowLeft size={14} />
+          Back
+        </button>
+        <button>Share Movie</button>
+      </div>
       {/* Cinematic Banner */}
       <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-[#151517]">
         <SmartImg
@@ -266,10 +210,13 @@ export default function MovieDetails() {
       </div>
       {movie.owner === "user" && (
         <div>
-          <button onClick={() => {
-            deleteCustomMovie(movie.id);
-            navigate("/")
-          }} className="ml-auto mt-6 flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/5 px-4 py-2 text-sm font-medium text-red-500 transition-all duration-200 hover:border-transparent hover:bg-red-600 hover:text-white focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-stone-900 focus:outline-none">
+          <button
+            onClick={() => {
+              deleteCustomMovie(movie.id);
+              navigate("/");
+            }}
+            className="mt-6 ml-auto flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/5 px-4 py-2 text-sm font-medium text-red-500 transition-all duration-200 hover:border-transparent hover:bg-red-600 hover:text-white focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-stone-900 focus:outline-none"
+          >
             <span>Delete</span>
             <Trash2 size={18} />
           </button>
