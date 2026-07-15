@@ -24,6 +24,7 @@ import AddSeries from "./features/add-series";
 import { CustomMoviesProvider } from "./contexts/custom-movies-context";
 import { useSidebar } from "./hooks/use-sidebar";
 import { VideoPlayerProvider } from "./contexts/video-player-context";
+import { Toaster } from "@/components/ui/sonner";
 import VideoPlayer from "./components/video-player";
 
 function App() {
@@ -48,7 +49,7 @@ function Dashboard() {
   const { sidebarOpen } = useSidebar();
 
   return (
-    <div className="bg-[#0d0c0f] text-white">
+    <div className="bg-dark text-white">
       {/* Navigation Menu */}
       <div className="grid h-screen overflow-hidden md:grid-cols-[min-content_1fr]">
         {/* Side Bar*/}
@@ -56,7 +57,7 @@ function Dashboard() {
         <VideoPlayer />
 
         <div
-          className={`h-screen transition ${sidebarOpen && "translate-x-50.75 sm:-translate-x-0"}`}
+          className={`h-screen transition ${sidebarOpen && "translate-x-50.75 md:-translate-x-0"}`}
         >
           {/* Route Configuration */}
           <Routes>
@@ -82,6 +83,7 @@ function Dashboard() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/help" element={<Help />} />
           </Routes>
+          <Toaster position="bottom-right" theme="dark" />
         </div>
       </div>
     </div>
