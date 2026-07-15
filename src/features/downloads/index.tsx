@@ -15,7 +15,7 @@ const Downloads = () => {
         >
           Clear Downloads
         </button>
-        <button className="block sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
+        <button className="block md:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {!sidebarOpen && <Menu size={20} className="fill-[#9698P99] hover:fill-white" />}
           {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
         </button>

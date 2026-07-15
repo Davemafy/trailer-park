@@ -1,4 +1,3 @@
-import VideoPlayer from "@/components/video-player";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { Bell, LayoutGrid, Menu, Radio, X } from "lucide-react";
 import { NavLink, Outlet, useLocation } from "react-router";
@@ -36,7 +35,7 @@ function Home() {
                       to={item.to}
                       end
                       className={({ isActive }) =>
-                        `text-base sm:text-sm font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
+                        `text-sm font-medium transition-colors ${isActive || isMoviesActive || isSeriesActive || isTvShowsActive ? "text-white" : "text-fade hover:text-zinc-300"}`
                       }
                     >
                       {item.name}
@@ -56,12 +55,12 @@ function Home() {
                   <Bell size={20} />
                 </button>
               </li>
-              <li className="hidden sm:block">
+              <li className="hidden md:block">
                 <button className="flex">
                   <LayoutGrid className="fill-[#9698P99] hover:fill-white" size={20} />
                 </button>
               </li>
-              <li className="sm:hidden">
+              <li className="md:hidden">
                 <button onClick={() => setSidebarOpen(!sidebarOpen)}>
                   {!sidebarOpen && <Menu size={20} className="fill-[#9698P99] hover:fill-white" />}
                   {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
@@ -71,7 +70,6 @@ function Home() {
           </nav>
         </header>
 
-        <VideoPlayer />
 
         {/* Main Dashboard */}
         <main className="scroll-container grid h-full w-full scrollbar-none overflow-x-auto overflow-y-auto p-6 pb-0 [-ms-overflow-style:none] sm:p-6 sm:pb-0 [&::-webkit-scrollbar]:hidden">

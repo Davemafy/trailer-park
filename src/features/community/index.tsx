@@ -8,15 +8,15 @@ const Community = () => {
 
   return (
     <div className="flex h-full flex-col gap-4">
-        <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6 sm:py-4">
+      <div className="flex items-center justify-between border-b border-[#151517] p-6 py-6 sm:py-4">
         <h1 className="text-base font-semibold">Community</h1>
         <button
           onClick={() => alert("Coming soon!")}
-          className="xs:text-sm hidden rounded-full bg-neutral-900 p-2 px-5 text-xs sm:block"
+          className="xs:text-sm hidden rounded-full bg-neutral-900 p-2 px-5 text-xs md:block"
         >
           Find your community
         </button>
-        <button className="block sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
+        <button className="block md:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {!sidebarOpen && <Menu size={20} className="fill-[#9698P99] hover:fill-white" />}
           {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
         </button>

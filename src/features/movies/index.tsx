@@ -9,7 +9,15 @@ export default function Movies() {
   const data = {
     ...moviesData,
     trending: [
-      ...(customMovies ? customMovies.filter((movie) => movie.category === "trending") : []),
+      ...(customMovies
+        ? customMovies.filter((movie) => movie.category === "trending").reverse()
+        : []),
+      ...moviesData.trending,
+    ],
+    topRated: [
+      ...(customMovies
+      ? customMovies.filter((movie) => movie.category === "top-rated").reverse()
+        : []),
       ...moviesData.trending,
     ],
   };

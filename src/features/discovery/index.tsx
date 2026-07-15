@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { Menu, X } from "lucide-react";
 import { useVideoPlayer } from "@/hooks/use-video-player";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Discovery() {
   const {
@@ -24,8 +25,8 @@ export default function Discovery() {
     <div className="dicovery-page grid h-full w-full grid-rows-[min-content_1fr] overflow-x-auto bg-[#0d0c0f]">
       <header className="mt-4 flex w-full flex-col overflow-x-auto">
         {/* Search Input Section Bar */}
-        <div className="flex w-full max-w-2xl items-center gap-6 px-4 pb-4">
-          <div className="relative flex w-full max-w-2xl flex-1 items-center gap-6">
+        <div className="flex w-full items-center justify-between gap-6 px-4 pb-4 md:px-6">
+          <div className="relative flex w-full md:max-w-[80%] flex-1 items-center gap-6">
             <Search className="absolute left-4 h-5 w-5 text-zinc-500" />
             <input
               type="text"
@@ -39,13 +40,16 @@ export default function Discovery() {
             />
           </div>
 
-          <button className="block sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
-            {!sidebarOpen && <Menu size={20} className="fill-[#9698P99] hover:fill-white" />}
-            {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
+          <button className="block md:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
+            {sidebarOpen ? (
+              <X size={20} className="fill-[#9698P99] hover:fill-white" />
+            ) : (
+              <Menu size={20} className="fill-[#9698P99] hover:fill-white" />
+            )}
           </button>
         </div>
         {/* Genre Pills Row Container */}
-        <div className="flex h-max w-full items-center gap-2.5 overflow-x-auto border-b border-[#151517] p-4 py-2 pb-4 [&::-webkit-scrollbar]:hidden">
+        <div className="flex h-max w-full items-center gap-2.5 overflow-x-auto border-b border-[#151517] p-4 py-2 pb-4 md:px-6 [&::-webkit-scrollbar]:hidden">
           <button
             onClick={() => {
               setSearchQuery("");
@@ -80,28 +84,38 @@ export default function Discovery() {
       </header>
 
       {/* Content Feed Layout Grid Window */}
-      <div className="scroll-container grid h-full w-full scrollbar-none overflow-y-auto p-4 pt-3 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <div className="scroll-container grid h-full w-full scrollbar-none overflow-y-auto p-4 pt-3 sm:pt-6 [-ms-overflow-style:none] sm:px-6 [&::-webkit-scrollbar]:hidden">
         {loading ? (
-          <div className="text-zinc-500">Searching the database...</div>
+          <div className="xs:grid-cols-2 grid gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            {[
+              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+              0, 0,
+            ].map(() => (
+              <Skeleton className="bg-accent h-50 shrink-0 rounded-xl" />
+            ))}
+          </div>
         ) : results.length === 0 ? (
-          <div className="text-base text-zinc-400 sm:text-sm sm:text-zinc-500">
-            No items found matching criteria criteria. Try checking your keyword spellings.
+          <div className="xs:grid-cols-2 grid gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            {[
+              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+              0, 0,
+            ].map(() => (
+              <Skeleton className="bg-accent h-50 shrink-0 rounded-xl" />
+            ))}
           </div>
         ) : (
-          <div className="grid w-screen grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+          <div className="xs:grid-cols-2 grid gap-4  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
             {results.map((item: any) => (
-              <div key={item.id} className="transition-transform duration-200">
-                <Link to={`/movies/${item.id}`}>
-                  <TopRatedCard
-                    media={{
-                      ...item,
-                      title: item.title || item.name,
-                    }}
-                    className="flex-1"
-                    handleWatchNow={handleWatchNow}
-                  />
-                </Link>
-              </div>
+              <Link key={item.id} to={`/movies/${item.id}`}>
+                <TopRatedCard
+                  media={{
+                    ...item,
+                    title: item.title || item.name,
+                  }}
+                  className="flex-1"
+                  handleWatchNow={handleWatchNow}
+                />
+              </Link>
             ))}
           </div>
         )}

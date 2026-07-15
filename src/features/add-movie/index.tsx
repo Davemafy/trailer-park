@@ -1,20 +1,16 @@
-import { CloudUpload, Eye, Plus, ImageDown, EyeClosed } from "lucide-react";
+import { CloudUpload, Eye, Plus, ImageDown, EyeClosed, ArrowLeft } from "lucide-react";
 
-
-import {
-  useEffect,
-  useRef,
-  useState,
-  type SubmitEventHandler,
-} from "react";
+import { useEffect, useRef, useState, type SubmitEventHandler } from "react";
 import { useCustomMovies } from "@/hooks/use-custom-movies";
 import { useIndexedDB } from "@/hooks/use-indexed-db";
 import PreviewMovie from "@/components/preview-movie";
 import { useIsMobile } from "@/hooks/use-mobile";
 import CastBlock from "@/components/cast-block";
+import { useNavigate } from "react-router";
+import avatarPlaceholder from "../../assets/img/avatar-placeholder.png";
 
 const defaultMovie: TMDBMovieResponse = {
-  id: 0, 
+  id: 0,
   adult: false,
   backdrop_path: null,
   belongs_to_collection: null,
@@ -26,15 +22,15 @@ const defaultMovie: TMDBMovieResponse = {
   original_language: "",
   original_title: "",
   overview: "",
-  popularity: 0, 
+  popularity: 0,
   poster_path: null,
   production_companies: [],
   production_countries: [],
   release_date: "",
-  revenue: 0, 
+  revenue: 0,
   runtime: null,
   spoken_languages: [],
-  status: "Released", 
+  status: "Released",
   tagline: null,
   title: "",
   video: false,
@@ -43,9 +39,8 @@ const defaultMovie: TMDBMovieResponse = {
   credits: {
     cast: [],
   },
-  vote_count: 0, 
+  vote_count: 0,
 };
-
 
 const AddMovie = () => {
   const { customMovies, setCustomMovies } = useCustomMovies();
@@ -53,6 +48,8 @@ const AddMovie = () => {
   const [movie, setMovie] = useIndexedDB<TMDBMovieResponse>("movie", defaultMovie);
   const [posterName, setPosterName] = useIndexedDB<string | null>("poster-name", null);
   const [previewing, setPreviewing] = useState(!useIsMobile());
+
+  const navigate = useNavigate();
 
   const generateUniqueNumericId = (): number => {
     const timestamp = Date.now();
@@ -74,7 +71,7 @@ const AddMovie = () => {
 
       if (container instanceof HTMLElement) {
         const elementOffset = newestInput.offsetTop;
-        const extraPadding = 80;
+        const extraPadding = 20;
 
         container.scrollTo({
           top: elementOffset - container.offsetTop + extraPadding,
@@ -83,8 +80,8 @@ const AddMovie = () => {
       }
 
       const inputToFocus = newestInput.querySelector(`actor-${lastIndex}-name`);
+      console.log(inputToFocus);
       if (inputToFocus instanceof HTMLInputElement) {
-
         setTimeout(() => {
           inputToFocus.focus({ preventScroll: true });
         }, 100);
@@ -128,30 +125,40 @@ const AddMovie = () => {
     const newMovieWithId = {
       ...movie,
       id: generateUniqueNumericId(),
+      owner: "user",
     };
 
     setCustomMovies([...customMovies, newMovieWithId]);
 
-    alert("Movie added succesfully");
+
     setMovie(defaultMovie);
+    navigate("/")
+    alert("Movie added succesfully");
   };
 
   return (
     <div className="-my-4 flex h-full gap-x-0 overflow-y-auto sm:-my-6 sm:gap-x-4">
       <form
         onSubmit={handleSubmit}
-        className={`form-container flex h-full w-full scrollbar-none flex-col gap-2 overflow-y-auto p-0.5 pb-18 text-sm transition-all duration-500 ease-in-out sm:pt-4 ${
+        className={`form-container flex h-full w-full scrollbar-none flex-col gap-2 overflow-y-auto p-0.5 pt-0 pb-18 text-sm transition-all duration-500 ease-in-out ${
           previewing
             ? "pointer-events-none max-w-0 overflow-hidden p-0 opacity-0 sm:pointer-events-auto sm:max-w-full sm:p-0.5 sm:opacity-100"
             : "max-w-full opacity-100"
         }`}
       >
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-dark sticky -top-0.5 flex items-center gap-2 py-3 pb-2 text-xs font-semibold text-[#969899] transition-colors hover:text-white"
+        >
+          <ArrowLeft size={14} />
+          Back
+        </button>{" "}
         <div className="flex flex-col gap-2">
           <label htmlFor="movie-name">Movie Name</label>
           <input
             name="movie-name"
             id="movie-name"
-            value={movie.name}
+            value={movie.title}
             onInput={(e) => {
               const value = e.currentTarget.value;
               setMovie((movie) => {
@@ -230,7 +237,6 @@ const AddMovie = () => {
             </div>
           </div>
         </div>
-
         <div className="flex flex-col gap-2">
           <div className="grid flex-1 gap-2">
             <label htmlFor="movie-rating">Movie Rating</label>
@@ -238,9 +244,9 @@ const AddMovie = () => {
               type="number"
               name="movie-rating"
               id="movie-rating"
-              value={movie.vote_average}
+              value={isNaN(movie.vote_average) ? "" : movie.vote_average}
               onChange={(e) => {
-                setMovie({ ...movie, vote_average: e.currentTarget.valueAsNumber });
+                setMovie({ ...movie, vote_average: e.currentTarget.valueAsNumber ?? 0 });
               }}
               placeholder="4.5"
               max={10}
@@ -298,7 +304,12 @@ const AddMovie = () => {
                   credits: {
                     cast: [
                       ...(movie?.credits?.cast ?? []),
-                      { id: generateUniqueNumericId(), name: "", character: "", profile_path: "" },
+                      {
+                        id: generateUniqueNumericId(),
+                        name: "",
+                        character: "",
+                        profile_path: avatarPlaceholder,
+                      },
                     ],
                   },
                 });

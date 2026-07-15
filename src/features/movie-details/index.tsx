@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { Plus, Star, ArrowLeft, Clock, Calendar, Globe } from "lucide-react";
+import { Plus, Star, ArrowLeft, Clock, Calendar, Globe, Trash2 } from "lucide-react";
 import { TMDB_API_KEY, TMDB_BASE_URL } from "../../config/env-config";
 import { Button } from "@/components/ui/button";
 import ReactPlayer from "react-player";
@@ -9,20 +9,18 @@ import { SmartImg } from "@/components/smart-img";
 import clapboardFallback from "../../assets/img/placeholder-image.svg";
 import avatarPlaceholder from "../../assets/img/avatar-placeholder.png";
 
-
 export default function MovieDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { customMovies } = useCustomMovies();
+  const { customMovies, deleteCustomMovie } = useCustomMovies();
 
-  const [movie, setMovie] = useState< TMDBMovieResponse | null>(null);
+  const [movie, setMovie] = useState<TMDBMovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const [activeVideoKey, setActiveVideoKey] = useState<string | null>(null);
   const [playingTitle, setPlayingTitle] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   const handleWatchNow = async (mediaId: number, mediaTitle: string) => {
     setIsModalOpen(true);
@@ -39,7 +37,7 @@ export default function MovieDetails() {
         setActiveVideoKey(trailer.key);
         setPlayingTitle(mediaTitle);
       } else {
-      alert("Trailer preview not available for this title.");
+        alert("Trailer preview not available for this title.");
         setIsModalOpen(false);
       }
     } catch (err) {
@@ -70,7 +68,7 @@ export default function MovieDetails() {
         setMovie(data);
       } catch (error) {
         console.error("Error retrieving movie details layout content:", error);
-        setMovie((customMovies).find((item) => String(item.id) === id) ?? null);
+        setMovie(customMovies.find((item) => String(item.id) === id) ?? null);
       } finally {
         setLoading(false);
       }
@@ -106,7 +104,7 @@ export default function MovieDetails() {
   }
 
   return (
-    <div className="animate-fade-in w-full pt-3 pb-12">
+    <div className="animate-fade-in w-full pb-12">
       <button
         onClick={() => navigate(-1)}
         className="mb-5 flex items-center gap-2 text-xs font-semibold text-[#969899] transition-colors hover:text-white"
@@ -114,7 +112,6 @@ export default function MovieDetails() {
         <ArrowLeft size={14} />
         Back
       </button>
-
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
           <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl">
@@ -141,7 +138,6 @@ export default function MovieDetails() {
           </div>
         </div>
       )}
-
       {/* Cinematic Banner */}
       <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-[#151517]">
         <SmartImg
@@ -184,7 +180,6 @@ export default function MovieDetails() {
           </div>
         </div>
       </div>
-
       {/* Main Content */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Left Side Content */}
@@ -225,7 +220,6 @@ export default function MovieDetails() {
             </div>
           )}
         </div>
-
         {/* Right Info Data Sidebar block Panel */}
         <div className="flex h-fit flex-col gap-3.5 rounded-xl border border-[#151517] bg-[#121115] p-4">
           <div className="flex items-center gap-3 text-xs text-[#969899]">
@@ -270,6 +264,17 @@ export default function MovieDetails() {
           </div>
         </div>
       </div>
+      {movie.owner === "user" && (
+        <div>
+          <button onClick={() => {
+            deleteCustomMovie(movie.id);
+            navigate("/")
+          }} className="ml-auto mt-6 flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/5 px-4 py-2 text-sm font-medium text-red-500 transition-all duration-200 hover:border-transparent hover:bg-red-600 hover:text-white focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-stone-900 focus:outline-none">
+            <span>Delete</span>
+            <Trash2 size={18} />
+          </button>
+        </div>
+      )}{" "}
     </div>
   );
 }
