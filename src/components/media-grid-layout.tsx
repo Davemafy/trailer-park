@@ -13,33 +13,36 @@ interface MediaGridLayoutProps {
 
 export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutProps) {
   const { trending, popular, topRated, loading } = data;
-  const { handleWatchNow } = useVideoPlayer()
+  const location = useLocation();
+  const { handleWatchNow } = useVideoPlayer();
+
+
+  const moviepath = `${location.pathname === "/" ? "movies" : location.pathname}`;
 
   if (loading) {
     return <DemoLoader titlePrefix={titlePrefix} />;
   }
-
-  const location = useLocation();
-  const moviepath = `${location.pathname === "/" ? "movies" : location.pathname}`;
 
   return (
     <div className="grid w-full gap-2">
       {/* Trending Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base sm:text-sm font-medium">Trending {titlePrefix.toLowerCase()}</h2>
+          <h2 className="text-sm font-medium sm:text-sm">Trending {titlePrefix.toLowerCase()}</h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </button>
         </header>
         <div className="scroll-container -mx-6 flex min-h-64 gap-2.5 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
           {trending.slice(0, 10).map((item) => (
-            <Link to={`${moviepath}/${item.id}`}>
-              <TrendingCard key={item.id} media={item} handleWatchNow={handleWatchNow} />
+            <Link key={item.id} to={`${moviepath}/${item.id}`}>
+              <TrendingCard media={item} handleWatchNow={handleWatchNow} />
             </Link>
           ))}
           {trending.length == 0 && (
             <>
+              <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
+              <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
               <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
               <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
               <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
@@ -51,13 +54,13 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       {/* Popular / Continue Watching Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base sm:text-sm font-medium">Continue watching</h2>
+          <h2 className="text-sm font-medium sm:text-sm">Continue watching</h2>
           <Link to={"/recents"} className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </Link>
         </header>
-        <div className="scroll-container -mx-6 flex min-h-50 gap-3 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
-          {popular.slice(0, 10).map((item: any) => (
+        <div className="scroll-container -mx-6 flex min-h-50 gap-4 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
+          {popular.slice(10, 20).map((item: any) => (
             <ContinueWatchingCard key={item.id} media={item} handleWatchNow={handleWatchNow} />
           ))}
 
@@ -77,7 +80,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       {/* Top Rated Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="flex items-center gap-2 text-base font-medium">
+          <h2 className="flex items-center gap-2 text-sm font-medium">
             Top Rated <Star stroke="#ffc729" fill="#ffc729" size={16} />
           </h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">
@@ -86,8 +89,8 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
         </header>
         <div className="scroll-container -mx-6 flex gap-3 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
           {topRated.slice(0, 10).map((item: any) => (
-            <Link to={`${moviepath}/${item.id}`}>
-              <TopRatedCard key={item.id} media={item} handleWatchNow={handleWatchNow} />
+            <Link key={item.id} to={`${moviepath}/${item.id}`}>
+              <TopRatedCard media={item} handleWatchNow={handleWatchNow} />
             </Link>
           ))}
           {topRated.length == 0 && (
@@ -106,7 +109,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
         <div className="fixed right-6 bottom-6">
           <Link
             to={`/${titlePrefix.toLowerCase().replace(" ", "-")}/add`}
-            className="flex items-center gap-1 rounded-xl bg-red-600 p-2 px-2.5 text-base"
+            className="flex items-center gap-1 rounded-xl bg-red-600 p-2 px-2.5 text-sm"
           >
             Add{" "}
             {titlePrefix.endsWith("series")
@@ -130,12 +133,14 @@ function DemoLoader({ titlePrefix }: DemoLoaderProps) {
       {/* Trending Loading Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base sm:text-sm font-medium">Trending {titlePrefix.toLowerCase()}</h2>
+          <h2 className="text-sm font-medium sm:text-sm">Trending {titlePrefix.toLowerCase()}</h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </button>
         </header>
         <div className="scroll-container -mx-6 flex min-h-64 gap-2.5 overflow-x-auto px-6 pb-4 [&::-webkit-scrollbar]:hidden">
+          <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
+          <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
           <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
           <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
           <Skeleton className="bg-accent h-60 w-100 shrink-0 rounded-xl" />
@@ -145,7 +150,7 @@ function DemoLoader({ titlePrefix }: DemoLoaderProps) {
       {/* Contrinue Watching Loading Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="text-base sm:text-sm font-medium">Continue watching</h2>
+          <h2 className="text-sm font-medium sm:text-sm">Continue watching</h2>
           <Link to={"/recents"} className="text-fade flex items-center gap-1 text-[15px]">
             See all <ChevronRight size={15} />
           </Link>
@@ -163,7 +168,7 @@ function DemoLoader({ titlePrefix }: DemoLoaderProps) {
       {/* Top Rated Loading Section */}
       <section className="grid w-full gap-3">
         <header className="flex justify-between">
-          <h2 className="flex items-center gap-2 text-base font-medium">
+          <h2 className="flex items-center gap-2 text-sm font-medium">
             Top Rated <Star stroke="#ffc729" fill="#ffc729" size={16} />
           </h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">

@@ -3,6 +3,8 @@ import { Button } from "./ui/button";
 import { useRecents } from "@/features/recents/useRecents";
 import { useBookmarks } from "@/features/bookmarks/useBookmarks";
 import { SmartImg } from "./smart-img";
+import clapboardFallback from "../assets/img/placeholder-image.svg";
+import imdbLogo from "../assets/img/imdb.png";
 import type { VideoPlayerContextType } from "@/contexts/video-player-context";
 
 type TrendingCardProps = {
@@ -34,7 +36,7 @@ function TrendingCard({
           <div className="media-details mt-1 flex items-center gap-1">
             <img
               className="h-3"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/960px-IMDB_Logo_2016.svg.png?_=20200406194337"
+              src={imdbLogo}
               alt="imdb"
             />
             <p className="text-[11px]">{media.vote_average?.toFixed(1)} rating</p>
@@ -64,9 +66,9 @@ function TrendingCard({
         </div>
       </div>
       <SmartImg
-        className="media-banner absolute -z-10 h-full object-cover"
+        className="media-banner absolute -z-10 h-full w-full object-cover"
         path={media.backdrop_path}
-        fallback={"assets/img/placeholder.jpg"}
+        fallback={clapboardFallback}
         baseUrl={IMAGE_BASE}
         alt={media.title}
       />

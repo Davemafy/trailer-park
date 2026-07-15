@@ -57,7 +57,7 @@ function TopRatedCard({
         </div>
       </div>
       <SmartImg
-        className="media-banner absolute -z-10 h-full object-cover"
+        className="media-banner absolute -z-10 h-full w-full object-cover"
         path={media.backdrop_path}
         baseUrl={IMAGE_BASE}
         fallback={clapboardFallback}

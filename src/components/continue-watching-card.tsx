@@ -3,6 +3,8 @@ import { Play } from "lucide-react";
 import { Link } from "react-router";
 import { SmartImg } from "./smart-img";
 import type { VideoPlayerContextType } from "@/contexts/video-player-context";
+import clapboardFallback from "../assets/img/placeholder-image.svg";
+
 
 type ContinueWatchingCardProps = {
   media: TMDBMovieResponse;
@@ -47,7 +49,7 @@ function ContinueWatchingCard({
       <SmartImg
         className="media-banner absolute -z-1 h-full w-full object-cover object-top"
         path={media.backdrop_path}
-        fallback="/assets/img/placeholder.jpg"
+        fallback={clapboardFallback}
         baseUrl={IMAGE_BASE}
         alt={media.title}
       />
