@@ -12,7 +12,7 @@ export interface VideoPlayerContextType {
     mediaId: number,
     mediaTitle: string,
     mediaType?: "movie" | "tv"
-  ) => Promise<void>;
+) => Promise<void>;
 }
 
 export const VideoPlayerContext = createContext<VideoPlayerContextType | null>(null);
