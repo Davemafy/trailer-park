@@ -24,9 +24,9 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
   }
 
   return (
-    <div className="grid w-full gap-2">
+    <div className="grid w-full grid-rows-[min-content_min-content_min-content] gap-2">
       {/* Trending Section */}
-      <section className="grid w-full gap-3">
+      <section className="grid grid-rows-[min-content_1fr] gap-3">
         <header className="flex justify-between">
           <h2 className="text-sm font-medium sm:text-sm">Trending {titlePrefix.toLowerCase()}</h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">
@@ -52,7 +52,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       </section>
 
       {/* Popular / Continue Watching Section */}
-      <section className="grid w-full gap-3">
+      <section className="grid grid-rows-[min-content_1fr] gap-3">
         <header className="flex justify-between">
           <h2 className="text-sm font-medium sm:text-sm">Continue watching</h2>
           <Link to={"/recents"} className="text-fade flex items-center gap-1 text-[15px]">
@@ -78,7 +78,7 @@ export default function MediaGridLayout({ data, titlePrefix }: MediaGridLayoutPr
       </section>
 
       {/* Top Rated Section */}
-      <section className="grid w-full gap-3">
+      <section className="grid w-full grid-rows-[min-content_1fr] gap-3">
         <header className="flex justify-between">
           <h2 className="flex items-center gap-2 text-sm font-medium">
             Top Rated <Star stroke="#ffc729" fill="#ffc729" size={16} />
@@ -129,9 +129,9 @@ type DemoLoaderProps = {
 
 function DemoLoader({ titlePrefix }: DemoLoaderProps) {
   return (
-    <div className="grid w-full gap-2">
+    <div className="grid auto-rows-min w-full gap-2">
       {/* Trending Loading Section */}
-      <section className="grid w-full gap-3">
+      <section className="grid auto-rows-min w-full gap-3">
         <header className="flex justify-between">
           <h2 className="text-sm font-medium sm:text-sm">Trending {titlePrefix.toLowerCase()}</h2>
           <button className="text-fade flex items-center gap-1 text-[15px]">
