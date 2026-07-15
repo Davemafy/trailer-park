@@ -25,6 +25,7 @@ interface TMDBMovieResponse {
   name?: string;
   category?: "trending" | "top-rated";
   type?: "movie" | "tv";
+  owner?: string;
   credits?: {
     cast: TMDBCast[];
   };

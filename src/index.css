@@ -6,7 +6,9 @@
 @theme {
   --color-fade: oklch(0.53 0.005 286);
   --color-accent: #1d1c1ee1;
+  --color-dark: #0d0c0f;
   --breakpoint-xs: 295px;
+  
 }
 
 :root {
@@ -185,7 +187,9 @@ main h2 {
 
 .top-rated-card:hover .media-banner {
   transition: 500ms;
-  scale: 1.2;
+  scale: 1.05;
+  filter: contrast(1.05);
+
 }
 
 .trending-card:hover > div {
