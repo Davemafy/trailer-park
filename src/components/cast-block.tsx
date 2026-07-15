@@ -54,9 +54,9 @@ function CastBlock({
 
   return (
     <>
-      <div className="grid gap-1 rounded-2xl">
+      <div className="grid gap-2 rounded-2xl">
         <div className="flex justify-between">
-          <label className="font-medium text-white">Cast {index + 1}</label>
+          <label className="text-white">Cast {index + 1}</label>
           <button
             onClick={(e) => {
               e.preventDefault();

@@ -38,7 +38,7 @@ function PreviewMovie({ previewing, movie }: PreviewMovieProps) {
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1 rounded border border-zinc-800 bg-[#1c1a22] px-2 py-0.5 text-xs font-medium text-amber-400">
               <Star size={12} className="fill-amber-400 text-amber-400" />
-              <a href="#movie-rating"> {movie.vote_average?.toFixed(1)}</a>
+              <a href="#movie-rating">{isNaN(movie.vote_average) ? "0.0" : movie.vote_average.toFixed(1)}</a>
             </span>
             {movie.adult && (
               <span className="rounded border border-red-800/50 bg-red-900/40 px-1.5 py-0.5 text-[10px] font-bold text-red-400 uppercase">
@@ -96,10 +96,10 @@ function PreviewMovie({ previewing, movie }: PreviewMovieProps) {
                     />
 
                     <span className="w-full truncate text-xs font-medium text-white">
-                      {actor.name}
+                      {actor.name || "actor"}
                     </span>
                     <span className="w-full truncate text-[10px] text-zinc-500">
-                      {actor.character}
+                      {actor.character || "Chacter"}
                     </span>
                   </div>
                 ))}
