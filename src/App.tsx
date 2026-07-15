@@ -24,6 +24,7 @@ import AddSeries from "./features/add-series";
 import { CustomMoviesProvider } from "./contexts/custom-movies-context";
 import { useSidebar } from "./hooks/use-sidebar";
 import { VideoPlayerProvider } from "./contexts/video-player-context";
+import VideoPlayer from "./components/video-player";
 
 function App() {
   return (
@@ -52,7 +53,9 @@ function Dashboard() {
       <div className="grid h-screen overflow-hidden md:grid-cols-[min-content_1fr]">
         {/* Side Bar*/}
         <AppSidebar />
-        <div className={`h-screen transition ${sidebarOpen && "translate-x-50.75"}`}>
+        <VideoPlayer />
+
+        <div className={`h-screen transition ${sidebarOpen && "translate-x-50.75 sm:-translate-x-0"}`}>
           {/* Route Configuration */}
           <Routes>
             <Route path="/" element={<Home />}>
