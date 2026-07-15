@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { Plus, Star, ArrowLeft, Clock, Calendar, Globe, Trash2 } from "lucide-react";
+import { Plus, Star, ArrowLeft, Clock, Calendar, Globe, Trash2, Share2 } from "lucide-react";
 import { TMDB_API_KEY, TMDB_BASE_URL } from "../../config/env-config";
 import { Button } from "@/components/ui/button";
 import { useCustomMovies } from "@/hooks/use-custom-movies";
@@ -8,6 +8,7 @@ import { SmartImg } from "@/components/smart-img";
 import clapboardFallback from "../../assets/img/placeholder-image.svg";
 import avatarPlaceholder from "../../assets/img/avatar-placeholder.png";
 import { useVideoPlayer } from "@/hooks/use-video-player";
+import { toast } from "sonner";
 
 export default function MovieDetails() {
   const { id } = useParams<{ id: string }>();
@@ -20,6 +21,14 @@ export default function MovieDetails() {
   const [loading, setLoading] = useState<boolean>(true);
 
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w1280";
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+
+    toast.success("Link copied to clipboard", {
+      description: "Anyone with this link can watch this movie.",
+    });
+  };
 
   useEffect(() => {
     async function fetchMovieDetails() {
@@ -72,15 +81,21 @@ export default function MovieDetails() {
 
   return (
     <div className="animate-fade-in w-full pb-12">
-      <div
-        onClick={() => navigate(-1)}
-        className="mb-5 flex items-center gap-2 text-xs font-semibold text-[#969899] transition-colors hover:text-white"
-      >
-        <button className="flex items-center text-xs font-semibold text-[#969899] transition-colors hover:text-white">
+      <div className="mb-5 flex items-center justify-between gap-2">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-xs font-semibold text-[#969899] transition-colors hover:text-white"
+        >
           <ArrowLeft size={14} />
           Back
         </button>
-        <button>Share Movie</button>
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900/50 px-4 py-2 text-sm font-medium text-neutral-200 shadow-sm backdrop-blur-sm transition-all duration-200 hover:bg-neutral-800 hover:text-white"
+        >
+          <span className="text-xs">Share Movie</span>
+          <Share2 size={14} />
+        </button>
       </div>
       {/* Cinematic Banner */}
       <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-[#151517]">
@@ -89,7 +104,7 @@ export default function MovieDetails() {
           fallback={clapboardFallback}
           alt={movie.title}
           baseUrl={IMAGE_BASE_URL}
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-cover object-center"
         />
         {/* Dark Gradient Mask*/}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0c0f] via-[#0d0c0f]/40 to-transparent" />

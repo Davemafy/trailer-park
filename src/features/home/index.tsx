@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <>
-      <div className="grid h-full grid-rows-[min-content_1fr] bg-[#0d0c0f] text-white">
+      <div className="bg-dark grid h-full grid-rows-[min-content_1fr] text-white">
         {/* Top Nav */}
         <header className="border-b border-[#151517] p-6 py-5">
           <nav className="flex justify-between">
@@ -69,7 +69,6 @@ function Home() {
             </ul>
           </nav>
         </header>
-
 
         {/* Main Dashboard */}
         <main className="scroll-container grid h-full w-full scrollbar-none overflow-x-auto overflow-y-auto p-6 pb-0 [-ms-overflow-style:none] sm:p-6 sm:pb-0 [&::-webkit-scrollbar]:hidden">

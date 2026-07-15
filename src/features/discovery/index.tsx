@@ -22,7 +22,7 @@ export default function Discovery() {
   const { handleWatchNow } = useVideoPlayer();
 
   return (
-    <div className="dicovery-page grid h-full w-full grid-rows-[min-content_1fr] overflow-x-auto bg-[#0d0c0f]">
+    <div className="dicovery-page bg-dark grid h-full w-full grid-rows-[min-content_1fr] overflow-x-auto">
       <header className="mt-4 flex w-full flex-col overflow-x-auto">
         {/* Search Input Section Bar */}
         <div className="flex w-full items-center justify-between gap-6 px-4 pb-4 md:px-6">
@@ -87,24 +87,24 @@ export default function Discovery() {
       <div className="scroll-container grid h-full w-full scrollbar-none overflow-y-auto p-4 pt-3 [-ms-overflow-style:none] sm:px-6 sm:pt-6 [&::-webkit-scrollbar]:hidden">
         {loading ? (
           <div className="xs:grid-cols-2 grid grid-rows-[min-content_1fr] gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-            {[
-              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              0, 0,
-            ].map(() => (
-              <Skeleton className="bg-accent h-50 shrink-0 rounded-xl" />
+            {Array.from({ length: 5 }).map((_, index) => (
+              <Skeleton
+                key={`skeleton-${index}`}
+                className="bg-accent/50 h-48 w-full rounded-xl motion-safe:animate-pulse"
+              />
             ))}
           </div>
         ) : results.length === 0 ? (
           <div className="xs:grid-cols-2 grid gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-            {[
-              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              0, 0,
-            ].map(() => (
-              <Skeleton className="bg-accent h-50 shrink-0 rounded-xl" />
+            {Array.from({ length: 5 }).map((_, index) => (
+              <Skeleton
+                key={`skeleton-${index}`}
+                className="bg-accent/50 h-48 w-full rounded-xl motion-safe:animate-pulse"
+              />
             ))}
           </div>
         ) : (
-          <div className="auto-rows-min xs:grid-cols-2 grid gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+          <div className="xs:grid-cols-2 grid auto-rows-min gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
             {results.map((item: any) => (
               <Link key={item.id} to={`/movies/${item.id}`}>
                 <TopRatedCard

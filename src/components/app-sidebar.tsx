@@ -49,7 +49,7 @@ export default function AppSidebar() {
     >
       <div
         onClick={closeSidebar}
-        className={`absolute top-0 -z-10 h-full w-screen backdrop-blur-[0.2rem] md:hidden ${sidebarOpen ? "bg-[#36363618] opacity-100 transition" : "-translate-x-2/3 opacity-0"}`}
+        className={`absolute top-0 -z-10 h-full w-screen backdrop-blur-[0.2rem] md:hidden ${sidebarOpen ? "bg-black/80 opacity-100 transition" : "-translate-x-2/3 opacity-0"}`}
       ></div>
 
       <nav className="relative flex h-full flex-col gap-4 bg-[#1a161f] pt-16 pb-6 pl-6 text-base sm:gap-0">
@@ -64,7 +64,7 @@ export default function AppSidebar() {
           </button>
         </div>
         <div className="pb-5">
-          <h3 className={`text-[11px]`}>{sidebarOpen ? "MENU": "MU" }</h3>
+          <h3 className={`text-[11px]`}>{sidebarOpen ? "MENU" : "MU"}</h3>
           <ul className="relative flex flex-col gap-4 pt-3">
             {menuGroup.map((item) => (
               <SidebarLink
@@ -80,7 +80,7 @@ export default function AppSidebar() {
 
         {/* Libary Section */}
         <div className="py-5">
-          <h3 className={`text-[11px]`}>{sidebarOpen ? "LIBRARY": "LB" }</h3>
+          <h3 className={`text-[11px]`}>{sidebarOpen ? "LIBRARY" : "LB"}</h3>
           <ul className="relative flex flex-col gap-4 pt-3">
             {libraryGroup.map((item) => (
               <SidebarLink

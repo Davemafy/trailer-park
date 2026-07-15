@@ -130,9 +130,8 @@ const AddMovie = () => {
 
     setCustomMovies([...customMovies, newMovieWithId]);
 
-
     setMovie(defaultMovie);
-    navigate("/")
+    navigate("/");
     alert("Movie added succesfully");
   };
 
@@ -294,7 +293,7 @@ const AddMovie = () => {
           </div>
         </div>
         <div className="grid gap-2">
-          <div className="top sticky -top-4 flex items-center justify-between border-b border-[#151517] bg-[#0d0c0f] py-2">
+          <div className="top bg-dark sticky -top-4 flex items-center justify-between border-b border-[#151517] py-2">
             <label htmlFor="movie-cast">Movie Set</label>
             <button
               onClick={(e) => {
