@@ -5,7 +5,7 @@ import { useIndexedDB } from "@/hooks/use-indexed-db";
 export const CustomMoviesProvider = ({ children }: PropsWithChildren) => {
   const [customMovies, setCustomMovies] = useIndexedDB<TMDBMovieResponse[]>("custom-movies", []);
 
-  const deleteCustomMovie = (id) => {
+  const deleteCustomMovie = (id: number) => {
     setCustomMovies(customMovies.filter((movie) => movie.id !== id))
   };
 
