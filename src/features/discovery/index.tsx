@@ -95,11 +95,11 @@ export default function Discovery() {
             ))}
           </div>
         ) : results.length === 0 ? (
-          <div className="xs:grid-cols-2 grid gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-            {Array.from({ length: 5 }).map((_, index) => (
+          <div className="xs:grid-cols-2 grid auto-rows-min gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            {Array.from({ length: 15 }).map((_, index) => (
               <Skeleton
                 key={`skeleton-${index}`}
-                className="bg-accent/50 h-48 w-full rounded-xl motion-safe:animate-pulse"
+                className="bg-accent/50 h-45 w-full rounded-xl motion-safe:animate-pulse"
               />
             ))}
           </div>
