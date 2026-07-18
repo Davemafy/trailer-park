@@ -90,7 +90,7 @@ export default function Discovery() {
             {Array.from({ length: 15 }).map((_, index) => (
               <Skeleton
                 key={`skeleton-${index}`}
-                className="bg-accent/50 h-48 w-full rounded-xl motion-safe:animate-pulse"
+                className="bg-accent/50 h-45 w-full rounded-xl motion-safe:animate-pulse"
               />
             ))}
           </div>
