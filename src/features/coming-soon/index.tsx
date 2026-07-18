@@ -8,17 +8,16 @@ import { toast } from "sonner";
 import { useState } from "react";
 
 const ComingSoon = () => {
-  const list = [];
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
 
   const { sidebarOpen, setSidebarOpen } = useSidebar();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    
+
     toast.success("You have been added on the waitlist");
 
-    setEmail("")
+    setEmail("");
   }
 
   return (
