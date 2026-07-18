@@ -26,7 +26,7 @@ const ComingSoon = () => {
         <h1 className="text-base font-semibold">Coming Soon</h1>
         <button
           onClick={() => alert("Coming soon!")}
-          className="hidden rounded-full bg-neutral-900 p-2 px-5 text-sm sm:block"
+          className="hidden rounded-full bg-neutral-900 p-2 px-5 text-sm md:block"
         >
           Get Alerted
         </button>
@@ -36,37 +36,37 @@ const ComingSoon = () => {
           {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
         </button>
       </div>
-      <div className="flex h-full flex-wrap gap-4 overflow-y-auto p-6 py-10 [&::-webkit-scrollbar]:hidden">
+      <div className="flex h-full flex-wrap gap-4 overflow-y-auto px-5 py-10 [&::-webkit-scrollbar]:hidden">
         <div className="mx-auto flex flex-col items-center gap-6">
           <div className="flex flex-col items-center gap-2">
-            <img className="max-w-[30rem]" src={comingSoonPath} alt="" />
+            <img className="w-full max-w-[30rem]" src={comingSoonPath} alt="" />
             <div className="flex flex-col gap-4 text-center">
-              <h1 className="text-4xl font-semibold">Coming Soon</h1>
+              <h1 className="text-3xl font-semibold sm:text-4xl">Coming Soon</h1>
               <p className="text-sm text-zinc-400">
-                Were building something amazing for our community. <br />
-                Stay tuned and be the first to know when we launch!
+                Were building something amazing for our community. Stay tuned and be the first to
+                know when we launch!
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="flex h-22 w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416]">
-              <h3 className="text-3xl font-semibold text-[#ca1b29]">12</h3>
-              <span className="text-xs">Days</span>
+          <div className="xs:flex grid place-items-center items-center justify-center gap-2">
+            <div className="xs:w-14 flex w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416] py-3 sm:h-22 sm:w-30">
+              <h3 className="text-xl font-semibold text-[#ca1b29] sm:text-3xl">12</h3>
+              <span className="text-[11px] sm:text-xs">Days</span>
             </div>
-            <span className="text-xl font-medium">:</span>
-            <div className="flex h-22 w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416]">
-              <h3 className="text-3xl font-semibold text-[#ca1b29]">08</h3>
-              <span className="text-xs">Hours</span>
+            <span className="text-xl font-medium hidden xs:block">:</span>
+            <div className="xs:w-14 flex w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416] py-3 sm:h-22 sm:w-30">
+              <h3 className="text-xl font-semibold text-[#ca1b29] sm:text-3xl">08</h3>
+              <span className="text-[11px] sm:text-xs">Hours</span>
             </div>
-            <span className="text-xl font-medium">:</span>
-            <div className="flex h-22 w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416]">
-              <h3 className="text-3xl font-semibold text-[#ca1b29]">34</h3>
-              <span className="text-xs">Minutes</span>
+            <span className="text-xl font-medium hidden xs:block">:</span>
+            <div className="xs:w-14 flex w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416] py-3 sm:h-22 sm:w-30">
+              <h3 className="text-xl font-semibold text-[#ca1b29] sm:text-3xl">34</h3>
+              <span className="text-[11px] sm:text-xs">Minutes</span>
             </div>
-            <span className="text-xl font-medium">:</span>
-            <div className="flex h-22 w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416]">
-              <h3 className="text-3xl font-semibold text-[#ca1b29]">56</h3>
-              <span className="text-xs">Seconds</span>
+            <span className="text-xl font-medium hidden xs:block">:</span>
+            <div className="xs:w-14 flex w-30 flex-col items-center justify-center gap-3 rounded-md border border-[#1c1b1d] bg-[#151416] py-3 sm:h-22 sm:w-30">
+              <h3 className="text-xl font-semibold text-[#ca1b29] sm:text-3xl">56</h3>
+              <span className="text-[11px] sm:text-xs">Seconds</span>
             </div>
           </div>
           <div className="flex flex-col items-center justify-center gap-4">
