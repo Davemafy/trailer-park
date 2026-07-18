@@ -87,7 +87,7 @@ export default function Discovery() {
       <div className="scroll-container grid h-full w-full scrollbar-none overflow-y-auto p-4 pt-3 [-ms-overflow-style:none] sm:px-6 sm:pt-6 [&::-webkit-scrollbar]:hidden">
         {loading ? (
           <div className="xs:grid-cols-2 grid grid-rows-[min-content_1fr] gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-            {Array.from({ length: 5 }).map((_, index) => (
+            {Array.from({ length: 15 }).map((_, index) => (
               <Skeleton
                 key={`skeleton-${index}`}
                 className="bg-accent/50 h-48 w-full rounded-xl motion-safe:animate-pulse"
