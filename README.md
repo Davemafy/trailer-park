@@ -2,9 +2,10 @@
 
 > A modern movie streaming application built with React 19, TypeScript, and a feature-first architecture inspired by JAM-Forte Engineering Standards.
 
-Unlike most movie apps built as UI showcases, Trailer Park focuses on maintainability, scalability, and clean frontend architecture—demonstrating how production React applications should be structured as they grow.
+Unlike most movie apps built as UI showcases, Trailer Park focuses on maintainability, scalability, and clean frontend architecture,
+demonstrating how production React applications should be structured as they grow.
 
-![Project Dashboard](./src/assets/img/dahboard.png)
+![Project Dashboard](https://github.com/user-attachments/assets/7c740d8b-7b72-4068-ae46-4b0662e53b40)
 
 ## 🏗 Architecture
 
