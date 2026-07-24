@@ -1,16 +1,17 @@
 import { ChevronLeft } from "lucide-react";
+import { Link } from "react-router";
 
 const AddCommunity = () => {
   return (
     <div>
-      <header className="p-8">
-        <div className="flex items-center gap-2">
+      <header className="p-7 px-4 sm:p-8">
+        <Link to={"/community"} className="flex items-center gap-2">
           <ChevronLeft size={20} className="-mb-0.5 text-zinc-400" />
           <p className="text-base font-medium">Create Community</p>
-        </div>
+        </Link>
       </header>
       <div className="px-8">
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <div className="flex items-center gap-2">
             <span className="flex w-10 text items-center justify-center rounded-full bg-[#d2162c] px-4 py-2 font-medium">
               1
