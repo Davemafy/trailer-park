@@ -69,8 +69,8 @@ const ComingSoon = () => {
               <span className="text-[11px] sm:text-xs">Seconds</span>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-center text-sm text-zinc-400">
+          <div className="flex flex-col pt-2 items-center justify-center gap-4">
+            <p className="text-center text-xs leading-5 text-zinc-400">
               Want to be notified? <br /> We'll let you know when it's ready
             </p>
             <form onSubmit={handleSubmit} className="flex items-center gap-2">
