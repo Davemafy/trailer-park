@@ -26,6 +26,7 @@ import { useSidebar } from "./hooks/use-sidebar";
 import { VideoPlayerProvider } from "./contexts/video-player-context";
 import { Toaster } from "@/components/ui/sonner";
 import VideoPlayer from "./components/video-player";
+import AddCommunity from "./features/add-community";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function Dashboard() {
             </Route>
             <Route path="/discovery" element={<Discovery />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/community/add" element={<AddCommunity />} />
             <Route path="/coming-soon" element={<ComingSoon />} />
             <Route path="/recents" element={<Recents />} />
             <Route path="/bookmarks" element={<Bookmarks />} />

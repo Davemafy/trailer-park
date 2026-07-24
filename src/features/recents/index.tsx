@@ -21,8 +21,11 @@ const Recents = () => {
           Clear Recents
         </button>
         <button className="block md:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
-          {!sidebarOpen && <Menu size={20} className="fill-[#9698P99] hover:fill-white" />}
-          {sidebarOpen && <X size={20} className="fill-[#9698P99] hover:fill-white" />}
+          {sidebarOpen ? (
+            <X size={20} className="fill-[#9698P99] hover:fill-white" />
+          ) : (
+            <Menu size={20} className="fill-[#9698P99] hover:fill-white" />
+          )}
         </button>
       </div>
       <div className="flex h-full flex-wrap gap-4 overflow-y-auto p-6 py-0 [&::-webkit-scrollbar]:hidden">
